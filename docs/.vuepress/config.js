@@ -12,6 +12,18 @@ module.exports = {
     lineNumbers: true,
   },
   themeConfig: {
+    editLinks: true,
+    editLinkText: "在 GitHub 上编辑此页 ！",
+    lastUpdated: "最后一次更新",
+    serviceWorker: {
+      updatePopup: true,
+      updatePopup: {
+        message: "新内容可用。",
+        buttonText: "刷新",
+      },
+    },
+    search: true,
+    searchMaxSuggestions: 10,
     // 添加导航栏
     nav: [
       { text: "主页", link: "/" },
@@ -69,17 +81,5 @@ module.exports = {
         },
       ],
     },
-    sidebarDepth: 2,
-    lastUpdated: "最后一次更新",
-    search: true, // 搜索
-    searchMaxSuggestoins: 10,
-    serviceWorker: {
-      updatePopup: {
-        message: "有新的内容.",
-        buttonText: "更新",
-      },
-    },
-    editLinks: true,
-    editLinkText: "在 GitHub 上编辑此页 ！",
   },
 };
