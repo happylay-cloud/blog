@@ -10,5 +10,5 @@ features:
     details:
   - title: 收藏
     details:
-footer: Apache-2.0 License | Copyright © 2020-present Happylay
+footer: Apache-2.0 License | Copyright © 2020 happylay
 ---
