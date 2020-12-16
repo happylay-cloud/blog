@@ -4,13 +4,13 @@ on: [push]
 # 任务
 jobs:                   
   # 任务编号自定义
-  job3: 
+  docs: 
     # 运行环境(ubuntu-latest, ubuntu-18.04, or ubuntu-16.04, windows-latest, windows-2019, or windows-2016, macOS-latest or macOS-10.14)
     runs-on: ubuntu-latest
     # 运行步骤
     steps:
     # 初始化node环境
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v1
     # |可以执行多行命令
     - run: |
         # 查看node版本
