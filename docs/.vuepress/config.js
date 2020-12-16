@@ -26,11 +26,11 @@ module.exports = {
     searchMaxSuggestions: 10,
     // 添加导航栏
     nav: [
-      { text: "主页", link: "/" },
-      { text: "划水摸鱼", link: "/fish/" },
-      { text: "打怪升级", link: "/book/" },
+      { text: "主页 🎈", link: "/" },
+      { text: "划水摸鱼 🎈", link: "/fish/" },
+      { text: "打怪升级 🎈", link: "/book/" },
       {
-        text: "缓缓打出一个？",
+        text: "缓缓打出一个❓",
         items: [
           { text: "gitea", link: "https://github.com/go-gitea/gitea.git" },
           { text: "colorui", link: "https://github.com/weilanwl/ColorUI.git" },
