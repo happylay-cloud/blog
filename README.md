@@ -2,6 +2,8 @@
 
 前端 📒
 
-vuepress dev docs
+npm run doc:dev
 
-vuepress build docs
+npm run doc:build
+
+npm run doc:deploy
