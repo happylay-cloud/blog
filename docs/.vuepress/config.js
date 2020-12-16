@@ -53,7 +53,7 @@ module.exports = {
         {
           title: "摸鱼技巧二",
           collapsable: true,
-          children: [{ title: "升级", path: "one/two" }],
+          children: [{ title: "升级", path: "two/two" }],
         },
       ],
       "/book/": [
