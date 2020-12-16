@@ -1,7 +1,7 @@
 module.exports = {
     title: '前端笔记📒',
     description: '老白嫖怪了',
-    dest: './dist',
+    dest: './docs/dist',
     port: '7777',
     head: [
         ['link', {rel: 'icon', href: '/img/favicon.ico'}]
