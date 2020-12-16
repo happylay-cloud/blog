@@ -12,3 +12,5 @@ features:
     details:
 footer: Apache-2.0 License | Copyright © 2020 happylay
 ---
+
+<music-player></music-player>
