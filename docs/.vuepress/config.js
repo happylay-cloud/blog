@@ -1,8 +1,12 @@
 module.exports = {
-  title: "前端笔记📒", // 设置网站标题
-  description: "老白嫖怪了", // 描述
-  dest: "./dist", // 设置输出目录
-  port: "2020", // 端口
+  // 设置网站标题
+  title: "前端笔记📒",
+  // 描述
+  description: "老白嫖怪了",
+  // 设置输出目录
+  dest: "./dist",
+  // 端口
+  port: "2020",
   head: [["link", { rel: "icon", href: "/img/favicon.ico" }]],
   markdown: {
     lineNumbers: true,
@@ -10,19 +14,21 @@ module.exports = {
   themeConfig: {
     // 添加导航栏
     nav: [
-      { text: "打怪升级", link: "/guide/" },
+      { text: "主页", link: "/" },
+      { text: "划水摸鱼", link: "/fish/" },
+      { text: "打怪升级", link: "/book/" },
       {
         text: "缓缓打出一个？",
         items: [
-          { text: "开始懵逼", link: "/guide/baodian/zero/" },
-          { text: "完全懵逼", link: "/guide/baodian/high/" },
+          { text: "gitea", link: "https://github.com/go-gitea/gitea.git" },
+          { text: "colorui", link: "https://github.com/weilanwl/ColorUI.git" },
         ],
       },
       {
         text: "白嫖小助手",
         items: [
           {
-            text: "Iconfont",
+            text: "图标库",
             items: [{ text: "矢量图标库", link: "https://www.iconfont.cn/" }],
           },
           {
@@ -38,35 +44,34 @@ module.exports = {
     // 添加侧边栏
     sidebar: {
       // 快速开始
-      "/guide/": [
+      "/fish/": [
         {
-          title: "青铜",
+          title: "摸鱼技巧一",
           collapsable: true,
-          children: [{ title: "一", path: "/guide/notes/ones" }],
+          children: [{ title: "打怪", path: "one/one" }],
         },
         {
-          title: "白银",
+          title: "摸鱼技巧二",
           collapsable: true,
-          children: [{ title: "二", path: "/guide/notes/two" }],
+          children: [{ title: "升级", path: "one/two" }],
         },
       ],
-      "/baodian/zero": [
+      "/book/": [
         {
           title: "开始懵逼",
           collapsable: true,
-          children: ["/baodian/zero/notes/one"],
+          children: [{ title: "打怪", path: "vue/zero/one" }],
         },
-      ],
-      "/baodian/high": [
         {
           title: "完全懵逼",
           collapsable: true,
-          children: ["/baodian/high/notes/one"],
+          children: [{ title: "打怪", path: "vue/high/one" }],
         },
       ],
     },
     sidebarDepth: 2,
     lastUpdated: "最后一次更新",
+    search: true, // 搜索
     searchMaxSuggestoins: 10,
     serviceWorker: {
       updatePopup: {
