@@ -1,8 +1,8 @@
 module.exports = {
   // 设置网站标题
-  title: "全栈笔记📒",
+  title: "随笔 📒",
   // 描述
-  description: "我大意了，没有学，很快啊，就更新了",
+  description: "我们男孩子想要的，就必须搞到手",
   // 设置输出目录
   dest: "./dist",
   // 端口

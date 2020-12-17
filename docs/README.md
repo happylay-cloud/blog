@@ -6,11 +6,11 @@ actionText: 快速study →
 actionLink: /book/
 features:
   - title: 👩‍❤️‍👩  关注
-    details:
+    details: 问题
   - title: ❤️  点赞
-    details:
+    details: 随时能帮助你的人
   - title: 🐱  收藏
-    details:
+    details: 思路
 footer: Apache-2.0 License | © 2020 happylay.com All rights reserved.
 ---
 
