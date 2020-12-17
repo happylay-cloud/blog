@@ -1,6 +1,6 @@
 module.exports = {
   // 设置网站标题
-  title: "前端笔记📒",
+  title: "全栈笔记📒",
   // 描述
   description: "老白嫖怪了",
   // 设置输出目录
@@ -29,6 +29,7 @@ module.exports = {
       { text: "主页 🎈", link: "/" },
       { text: "划水摸鱼 🎈", link: "/fish/" },
       { text: "打怪升级 🎈", link: "/book/" },
+      { text: "前端小抄 🎈", link: "/css-card/" },
       {
         text: "缓缓打出一个❓",
         items: [
@@ -78,6 +79,25 @@ module.exports = {
           title: "完全懵逼",
           collapsable: true,
           children: [{ title: "打怪", path: "vue/high/one" }],
+        },
+      ],
+      "/css-card/": [
+        {
+          title: "前端小抄",
+          collapsable: true,
+          children: [
+            "flexbox",
+            "git",
+            "grid",
+            "head",
+            "http",
+            "markdown",
+            "preview",
+            "sass",
+            "regex",
+            "boxmodel",
+            "console",
+          ],
         },
       ],
     },
