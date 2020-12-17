@@ -1,43 +1,14 @@
-### 学习笔记 📒
+# 随笔 📒
 
-##### 部署流程
+![happylay](https://img.shields.io/badge/摸鱼-划水-da282a)
+![GitHub last commit](https://img.shields.io/github/last-commit/happylay-cloud/happylay-cloud.github.io?style=flat-square)
 
-```
-npm install
+> ✍️ 在线编辑
 
-npm run docs:dev
+- 🎉👨‍👩‍👧‍👧 npm install
 
-npm run docs:build
+* 🎉👨‍👩‍👧‍👧 npm run docs:dev
 
-npm run docs:deploy
-```
+* 🎉👨‍👩‍👧‍👧 npm run docs:build
 
-##### 安装音乐播放器
-
-```
-npm i zw-player --save
-
-```
-
-##### 使用音乐播放器
-
-```html
-<template>
-  <div id="app">
-    <Player></Player>
-  </div>
-</template>
-
-<script>
-  import Player from "zw-player";
-
-  export default {
-    name: "App",
-    components: {
-      Player,
-    },
-  };
-</script>
-
-<style></style>
-```
+* 🎉👨‍👩‍👧‍👧 npm run docs:deploy
