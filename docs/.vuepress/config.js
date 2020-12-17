@@ -2,7 +2,7 @@ module.exports = {
   // 设置网站标题
   title: "随笔 📒",
   // 描述
-  description: "我们男孩子想要的，就必须搞到手",
+  description: "每天忙碌的日子，也不要忘记了好好生活",
   // 设置输出目录
   dest: "./dist",
   // 端口
