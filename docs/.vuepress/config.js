@@ -151,8 +151,11 @@ module.exports = {
       {
         text: "缓缓打出一个❓，嗯",
         items: [
-          { text: "gitea", link: "https://github.com/go-gitea/gitea.git" },
-          { text: "colorui", link: "https://github.com/weilanwl/ColorUI.git" },
+          { text: "nuxtjs", link: "https://zh.nuxtjs.org/" },
+          {
+            text: "colorui",
+            link: "https://www.kancloud.cn/m22543/colorui/1289227",
+          },
         ],
       },
     ],
