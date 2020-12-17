@@ -11,6 +11,7 @@ module.exports = {
   markdown: {
     lineNumbers: true,
   },
+  plugins: [["@vuepress/back-to-top"]],
   themeConfig: {
     editLinks: true,
     editLinkText: "在 GitHub 上编辑此页 ！",
@@ -112,7 +113,7 @@ module.exports = {
             text: "微服务",
             items: [
               {
-                text: "版本兼容",
+                text: "版本兼容 🌲",
                 link:
                   "https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明",
               },
@@ -135,6 +136,10 @@ module.exports = {
               {
                 text: "iconfont阿里矢量图库",
                 link: "https://www.iconfont.cn",
+              },
+              {
+                text: "动态标签🏷",
+                link: "http://shields.io",
               },
             ],
           },
