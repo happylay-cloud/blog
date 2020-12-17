@@ -76,8 +76,22 @@ module.exports = {
           {
             text: "前端懒人工具",
             items: [
+              { text: "蓝湖", link: "https://lanhuapp.com/" },
               { text: "favicon图标", link: "https://tool.lu/favicon/" },
               { text: "ico图标", link: "http://www.ico51.cn/" },
+            ],
+          },
+          {
+            text: "开发环境",
+            items: [
+              {
+                text: "windows包管理器-baulk",
+                link: "https://github.com/baulk/baulk",
+              },
+              {
+                text: "windows包管理器-scoop",
+                link: "https://github.com/lukesampson/scoop",
+              },
             ],
           },
         ],
