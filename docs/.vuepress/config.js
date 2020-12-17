@@ -33,7 +33,7 @@ module.exports = {
           {
             text: "摸鱼博客",
             items: [
-              { text: "前端技术月刊", link: "https://hellogithub.com/" },
+              { text: "后端技术月刊", link: "https://hellogithub.com/" },
               {
                 text: "前端技术月刊",
                 link: "https://xiaoluoboding.github.io/monthly/",
@@ -92,6 +92,15 @@ module.exports = {
                 text: "windows包管理器-scoop",
                 link: "https://github.com/lukesampson/scoop",
               },
+              {
+                text: "windows原版镜像",
+                link:
+                  "https://www.microsoft.com/zh-cn/software-download/windows10ISO",
+              },
+              {
+                text: "nexus3",
+                link: "https://www.sonatype.com/nexus/repository-oss/download",
+              },
             ],
           },
         ],
@@ -100,7 +109,17 @@ module.exports = {
         text: "高级摸鱼 🔥",
         items: [
           {
-            text: "摸鱼博客",
+            text: "微服务",
+            items: [
+              {
+                text: "版本兼容",
+                link:
+                  "https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明",
+              },
+            ],
+          },
+          {
+            text: "在线文档",
             items: [
               { text: "k8s在线配置", link: "https://k8syaml.com" },
               {
@@ -109,13 +128,23 @@ module.exports = {
               },
             ],
           },
+          {
+            text: "图标集合",
+            items: [
+              { text: "IconPark图标库", link: "http://iconpark.bytedance.com" },
+              {
+                text: "iconfont阿里矢量图库",
+                link: "https://www.iconfont.cn",
+              },
+            ],
+          },
         ],
       },
       { text: "划水摸鱼 🌧", link: "/fish/" },
       { text: "打怪升级 👾", link: "/book/" },
-      { text: "前端小抄 🎈", link: "/css-card/" },
+      { text: "代码片段 🎈", link: "/css-card/" },
       {
-        text: "缓缓打出一个❓",
+        text: "缓缓打出一个❓，嗯",
         items: [
           { text: "gitea", link: "https://github.com/go-gitea/gitea.git" },
           { text: "colorui", link: "https://github.com/weilanwl/ColorUI.git" },
