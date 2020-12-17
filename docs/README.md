@@ -2,14 +2,14 @@
 home: true
 lang: zh-CN
 heroImage: /img/logo.png
-actionText: 快速开始 →
+actionText: 快速白嫖 →
 actionLink: /book/
 features:
   - title: 👩‍❤️‍👩  关注
     details:
-  - title: 👍  点赞
+  - title: ❤️  点赞
     details:
-  - title: 🤚  收藏
+  - title: 🐱  收藏
     details:
 footer: Apache-2.0 License | © 2020 happylay.com All rights reserved.
 ---
