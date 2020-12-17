@@ -31,14 +31,53 @@ module.exports = {
         text: "摸鱼小工具 🐟",
         items: [
           {
-            text: "图标库",
-            items: [{ text: "矢量图标库", link: "https://www.iconfont.cn/" }],
+            text: "摸鱼博客",
+            items: [
+              { text: "前端技术月刊", link: "https://hellogithub.com/" },
+              {
+                text: "前端技术月刊",
+                link: "https://xiaoluoboding.github.io/monthly/",
+              },
+            ],
           },
           {
-            text: "博客指南",
+            text: "后端懒人工具",
             items: [
-              { text: "掘金", link: "https://juejin.im/" },
-              { text: "CSDN", link: "https://blog.csdn.net/" },
+              {
+                text: "在线json解析",
+                link: "https://www.json.cn/",
+              },
+              {
+                text: "yml格式转换",
+                link: "https://www.toyaml.com/index.html",
+              },
+              {
+                text: "websocket测试",
+                link: "http://www.websocket-test.com/",
+              },
+              {
+                text: "时间戳转换",
+                link: "http://tool.chinaz.com/Tools/unixtime.aspx",
+              },
+              {
+                text: "cron表达式",
+                link: "https://cron.qqe2.com/",
+              },
+              {
+                text: "linux程序包",
+                link: "https://pkgs.org/",
+              },
+              {
+                text: "大小写转换",
+                link: "https://tool.lanrentuku.com/daxiaoxie/",
+              },
+            ],
+          },
+          {
+            text: "前端懒人工具",
+            items: [
+              { text: "favicon图标", link: "https://tool.lu/favicon/" },
+              { text: "ico图标", link: "http://www.ico51.cn/" },
             ],
           },
         ],
