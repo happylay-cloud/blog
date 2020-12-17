@@ -96,6 +96,21 @@ module.exports = {
           },
         ],
       },
+      {
+        text: "高级摸鱼 🔥",
+        items: [
+          {
+            text: "摸鱼博客",
+            items: [
+              { text: "k8s在线配置", link: "https://k8syaml.com" },
+              {
+                text: "k8s接口文档",
+                link: "https://k8s.mybatis.io/v1.18/",
+              },
+            ],
+          },
+        ],
+      },
       { text: "划水摸鱼 🌧", link: "/fish/" },
       { text: "打怪升级 👾", link: "/book/" },
       { text: "前端小抄 🎈", link: "/css-card/" },

@@ -2,7 +2,7 @@
 home: true
 lang: zh-CN
 heroImage: /img/logo.png
-actionText: 快速白嫖 →
+actionText: 快速study →
 actionLink: /book/
 features:
   - title: 👩‍❤️‍👩  关注
