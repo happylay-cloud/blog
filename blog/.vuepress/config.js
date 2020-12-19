@@ -174,11 +174,11 @@ module.exports = {
         text: "个人空间",
         icon: "reco-message",
         items: [
-          // {
-          //   text: "哔哩哔哩",
-          //   link: "",
-          //   icon: "reco-bilibili",
-          // },
+          {
+            text: "哔哩哔哩",
+            link: "https://www.bilibili.com",
+            icon: "reco-bilibili",
+          },
           {
             text: "编辑博客",
             link:
