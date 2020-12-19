@@ -1,30 +1,30 @@
 {
-  "name": "happylay-cloud.github.io",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "前端笔记📒",
-  "main": "index.js",
+  "author": "happylay-cloud",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:deploy": "gh-pages -d dist"
+    "docs:dev": "vuepress dev blog",
+    "docs:build": "vuepress build blog",
+    "docs:deploy": "gh-pages -d dist",
+    "md5": "node md5.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/happylay-cloud/happylay-cloud.github.io.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/happylay-cloud/happylay-cloud.github.io/issues"
-  },
-  "homepage": "https://github.com/happylay-cloud/happylay-cloud.github.io#readme",
   "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.7.1",
-    "gh-pages": "^3.1.0",
-    "vuepress": "^1.7.1"
+    "@vuepress-reco/vuepress-plugin-extract-code": "^1.0.4",
+    "@vuepress-reco/vuepress-plugin-kan-ban-niang": "^1.0.5",
+    "@vuepress-reco/vuepress-plugin-pagation": "^1.6.0",
+    "@vuepress/plugin-medium-zoom": "^1.7.1",
+    "vuepress": "1.5.4",
+    "vuepress-plugin-auto-sidebar": "^1.5.0",
+    "vuepress-plugin-cursor-effects": "^1.0.0",
+    "vuepress-plugin-dynamic-title": "^1.0.0",
+    "vuepress-plugin-flowchart": "^1.4.3",
+    "vuepress-plugin-meting": "^0.1.1",
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
+    "vuepress-plugin-ribbon": "^1.0.2",
+    "vuepress-theme-reco": "1.5.7"
   },
   "dependencies": {
-    "zw-player": "^1.0.6"
-  }
+    "vue-class-component": "^7.2.3"
+  },
+  "description": "随笔"
 }
