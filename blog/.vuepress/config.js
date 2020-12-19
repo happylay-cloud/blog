@@ -1,6 +1,6 @@
 module.exports = {
   title: "每天忙碌的日子，也不要忘记了好好生活 🏠",
-  description: "随笔",
+  description: "如歌岁月，似水流年",
   dest: "./dist",
   locales: {
     "/": {
@@ -219,7 +219,7 @@ module.exports = {
     search: true,
     searchMaxSuggestions: 20,
     lastUpdated: "最后一次更新",
-    author: "happylay 🎄",
+    author: "happylay 🐑",
     authorAvatar: "/avatar.jpg",
     record: "",
     startYear: "2020",
