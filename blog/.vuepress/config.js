@@ -158,16 +158,6 @@ module.exports = {
             icon: "reco-lock",
             link: "/docs/轨迹/",
           },
-          {
-            text: "前端",
-            icon: "reco-lock",
-            link: "/docs/前端/",
-          },
-          {
-            text: "后端",
-            icon: "reco-lock",
-            link: "/docs/后端/",
-          },
         ],
       },
       {
