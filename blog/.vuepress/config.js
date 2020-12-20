@@ -177,6 +177,54 @@ module.exports = {
           },
         ],
       },
+      {
+        text: "工具集",
+        icon: "reco-coding",
+        items: [
+          {
+            text: "后端工具",
+            items: [
+              { text: "在线json解析", link: "https://www.json.cn/" },
+              { text: "yml格式转换", link: "https://www.toyaml.com/index.html" },
+              { text: "websocket测试", link: "http://coolaf.com/tool/chattest" },
+              { text: "时间戳转换", link: "http://tool.chinaz.com/Tools/unixtime.aspx" },
+              { text: "cron表达式", link: "https://cron.qqe2.com/" },
+              { text: "linux程序包", link: "https://pkgs.org/" },
+              { text: "大小写转换", link: "https://tool.lanrentuku.com/daxiaoxie/" },
+            ],
+          },
+          {
+            text: "前端工具",
+            items: [
+              { text: "Vant移动端组件库", link: "https://vant-contrib.gitee.io/vant/#/zh-CN/" },
+              { text: "Element桌面端组件库", link: "https://element.eleme.cn/#/zh-CN" },
+              { text: "uni-app前端框架", link: "https://uniapp.dcloud.io" },
+              { text: "Iconfont阿里矢量图库", link: "https://www.iconfont.cn" },
+              { text: "IconPark图标库", link: "http://iconpark.bytedance.com" },
+              { text: "favicon图标制作", link: "http://www.ico51.cn/" },
+            ],
+          },
+          {
+            text: "开发环境",
+            items: [
+              { text: "windows包管理器-baulk", link: "https://github.com/baulk/baulk" },
+              { text: "windows包管理器-scoop", link: "https://github.com/lukesampson/scoop" },
+              { text: "windows原版镜像", link: "https://www.microsoft.com/zh-cn/software-download/windows10ISO" },
+              { text: "nexus3仓库", link: "https://www.sonatype.com/nexus/repository-oss/download" },
+            ],
+          },
+          {
+            text: "微服务",
+            items: [
+              {
+                text: "版本兼容关系", link: "https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明",
+              },
+              { text: "k8s在线配置", link: "https://k8syaml.com" },
+              { text: "k8s接口文档", link: "https://k8s.mybatis.io/v1.18/" },
+            ]
+          }
+        ],
+      },
     ],
     subSidebar: "auto",
     type: "blog",
