@@ -91,3 +91,142 @@ router.beforeEach((to, from, next) => {
   </div>
 </template>
 ```
+
+## axios 网络请求
+
+```javascript
+import axios from "axios";
+import router from "./src/router/index";
+import Vue from "vue";
+const http = axios.create({
+  baseURL: "http://112.74.99.5:3000/web/api",
+});
+
+// 添加请求拦截器
+http.interceptors.request.use(
+  function(config) {
+    // 在发送请求之前做些什么
+    if (localStorage.getItem("token") && localStorage.getItem("id")) {
+      config.headers.Authorization = "Bearer " + localStorage.getItem("token");
+    }
+    return config;
+  },
+  function(error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+  }
+);
+
+// 添加响应拦截器
+http.interceptors.response.use(
+  function(response) {
+    // 对响应数据做点什么
+    return response;
+  },
+  function(error) {
+    // 对响应错误做点什么
+    console.dir(error);
+    if (error.response.status === 401 || error.response.status === 402) {
+      router.push("/login");
+      Vue.prototype.$msg.fail(error.response.data.message);
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default http;
+```
+
+## vant 组件库全局引用
+
+```javascript
+// 前端组件库
+import Vant from "vant";
+import "vant/lib/index.css";
+
+Vue.use(Vant);
+
+// 轻提示
+import { Toast } from "vant";
+Vue.prototype.$msg = Toast;
+```
+
+## vue.config.js 基础配置
+
+```javascript
+module.exports = {
+  // false加密代码，减少打包后大小
+  productionSourceMap: false,
+  publicPath: "./",
+
+  devServer: {
+    port: 8085,
+    // host: "localhost",
+    https: false,
+    open: true,
+  },
+};
+```
+
+## ref 使用
+
+:::tip
+父组件可以通过 ref 控制 dom 元素及属性，例如：父组件可以调用子组件方法。
+
+1.控制元素：
+this.\$refs.postInput.focus();
+
+2.调用方法：
+this.\$refs.focusInput.focusIpt();
+:::
+子组件
+
+```html
+<input v-model="content" ref="postInput" />
+<script>
+  export default {
+    props: ["dataLength"],
+    name: "CommentTitle",
+    data() {
+      return {
+        content: null,
+      };
+    },
+    methods: {
+      focusIpt() {
+        this.$refs.postInput.focus();
+      },
+    },
+  };
+</script>
+```
+
+父组件
+
+```html
+<comment-title ref="focusInput"></comment-title>
+<comment
+  @comment-len="len => (lens = len)"
+  @PostPublish="PostPublish"
+></comment>
+
+<script>
+  import CommentTitle from "@/components/article/CommentTitle";
+  export default {
+    name: "Article",
+    components: {
+      CommentTitle,
+    },
+    data() {
+      return {
+          lens: null,
+          model: {}
+      };
+    },
+    methods: {
+      PostPublish(id) {
+        this.$refs.focusInput.focusIpt();
+      }
+  };
+</script>
+```
