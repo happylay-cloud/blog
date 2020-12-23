@@ -35,7 +35,7 @@ publish: true
   <div>
     <my-addition></my-addition>
 
-    <p>---------------------------------</p>
+    <p>vuex</p>
 
     <my-subtraction></my-subtraction>
   </div>
@@ -197,13 +197,18 @@ export default {
     return {};
   },
   computed: {
+    // 据映射为计算属性（state）
     ...mapState(["count"]),
+    // 映射为计算属性（getter）
     ...mapGetters(["showNum"]),
   },
   methods: {
+    // 获得mapMutations映射的sub、subN函数（mutation）
     ...mapMutations(["sub", "subN"]),
+    // 获得mapActions映射的addAsync函数（action）
     ...mapActions(["subAsync", "subNAsync"]),
     btnHandler1() {
+      // 调用sub函数完成对数据的操作
       this.sub();
     },
   },
