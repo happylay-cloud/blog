@@ -384,3 +384,105 @@ export default {
   }
 </style>
 ```
+
+## 路由跳转
+
+```html
+<img :src="imgurl" alt="" v-if="imgurl" @click="$router.push('/edit')" />
+
+<script>
+  export default {
+    name: "Detail",
+    props: ["detailItem"],
+    data() {
+      return {
+        defaultImgae: 'this.src="' + require("../assets/user.jpg") + '"',
+      };
+    },
+    methods: {
+      pathPush() {
+        if (this.$route.path != `/article/${this.detailItem.id}`) {
+          this.$router.push(`/article/${this.detailItem.id}`);
+        }
+      },
+    },
+  };
+</script>
+```
+
+## watch() created() 方法
+
+:::tip
+watch()：可以监听数据变化。
+
+created()：组件实例创建完成，dom 还未生成，仅仅触发一次。
+:::
+
+```javascript
+<script>
+export default {
+  name: "Home",
+  components: {
+    NavBar,
+    Detail
+  },
+  data() {
+    return {
+      category: [],
+      active: 0
+    };
+  },
+  methods: {
+    async selectCategory() {
+      const res = await this.$http.get("/category");
+      this.changeCategory(res.data);
+    },
+    changeCategory(data) {
+      const category1 = data.map(item => {
+        item.list = [];
+        item.page = 0;
+        item.finished = false;
+        item.loading = false;
+        item.pagesize = 10;
+        return item;
+      });
+      console.log(category1);
+      this.category = category1;
+    },
+    async selectArticle() {
+      const categoryItem = this.categoryItem();
+      const res = await this.$http.get("/detail/" + categoryItem._id, {
+        params: {
+          page: categoryItem.page,
+          pagesize: categoryItem.pagesize
+        }
+      });
+      categoryItem.list.push(...res.data);
+      if (res.data.length < categoryItem.pagesize) {
+        categoryItem.finished = true;
+      }
+    },
+    categoryItem() {
+      const categoryItem = this.category[this.active];
+      console.log(categoryItem);
+      return categoryItem;
+    },
+    onLoad() {
+      const categoryItem = this.categoryItem();
+      categoryItem.page += 1;
+      categoryItem.loading = false;
+      this.selectArticle();
+    }
+  },
+  watch: {
+    active() {
+      this.selectArticle();
+    }
+  },
+  created() {
+    this.selectCategory();
+  }
+};
+</script>
+
+```
