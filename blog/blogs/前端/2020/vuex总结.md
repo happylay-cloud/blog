@@ -210,3 +210,125 @@ export default {
 };
 </script>
 ```
+
+## 总结
+
+:::tip
+A.state
+
+state 提供唯一的公共数据源，所有共享的数据都要统一放到 store 中的 state 中存储
+
+:::
+
+```javascript
+在组件中访问 state 的方式：
+
+1).this.$store.state.全局数据名称  如：this.$store.state.count
+
+2).先按需导入 mapState 函数： import { mapState } from 'vuex'
+
+然后数据映射为计算属性： computed:{ ...mapState(['全局数据名称']) }
+```
+
+:::tip
+B.mutation
+
+mutation 用于修改变更\$store 中的数
+:::
+
+```javascript
+1).声明
+mutations: {
+    add(state,step){
+      //第一个形参永远都是state也就是$state对象
+      //第二个形参是调用add时传递的参数
+      state.count+=step;
+    }
+  }
+
+2).使用：方式一
+
+methods:{
+  Add(){
+    //使用commit函数调用mutations中的对应函数，
+    //第一个参数就是我们要调用的mutations中的函数名
+    //第二个参数就是传递给add函数的参数
+    this.$store.commit('add',10)
+  }
+}
+
+3).使用：方式二
+import { mapMutations } from 'vuex'
+
+methods:{
+  ...mapMutations(['add'])
+}
+```
+
+:::tip
+C.action
+
+在 mutations 中不能编写异步的代码，会导致 vue 调试器的显示出错。
+
+在 vuex 中使用 action 来执行异步操作。
+
+:::
+
+```javascript
+3).声明
+actions: {
+  addAsync(context,step){
+    setTimeout(()=>{
+      context.commit('add',step);
+    },2000)
+  }
+}
+
+2).使用：方式一
+<button @click="AddAsync">...+1</button>
+
+methods:{
+  AddAsync(){
+    this.$store.dispatch('addAsync',5)
+  }
+}
+
+3).使用：方式二
+import { mapActions } from 'vuex'
+
+methods:{
+  ...mapMutations(['subAsync'])
+}
+```
+
+:::tip
+D.getter
+
+getter 用于对 store 中的数据进行加工处理形成新的数据
+
+它只会包装 store 中保存的数据，并不会修改 store 中保存的数据，当 store 中的数据发生变化时，getter 生成的内容也会随之变化
+
+:::
+
+```javascript
+
+2).声明
+export default new Vuex.Store({
+  .......
+  getters:{
+    //添加了一个showNum的属性
+    showNum : state =>{
+      return '最新的count值为：'+state.count;
+    }
+  }
+})
+
+2).使用：方式一
+{{$store.getters.showNum}}
+
+3).使用：方式二
+import { mapGetters } from 'vuex'
+computed:{
+  ...mapGetters(['showNum'])
+}
+```
