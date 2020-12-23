@@ -486,3 +486,57 @@ export default {
 </script>
 
 ```
+
+## 正则表达式使用
+
+:::tip
+const rue = new RegExp(this.rule);
+
+rue.test(this.content)
+:::
+
+```html
+<template>
+  <div>
+    <van-cell-group>
+      <!-- 输入任意文本 -->
+      <van-field
+        :label="label"
+        :type="type"
+        :placeholder="placeholder"
+        :rule="rule"
+        v-model="content"
+      />
+    </van-cell-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: ["label", "type", "placeholder", "rule"],
+    data() {
+      return {
+        content: "",
+      };
+    },
+    methods: {
+      handleulg() {
+        const rue = new RegExp(this.rule);
+        if (rue.test(this.content)) {
+          this.$emit("inputChange", this.content);
+        } else {
+          this.$emit("inputChange");
+        }
+      },
+    },
+    watch: {
+      content() {
+        console.log("监听");
+        this.handleulg();
+      },
+    },
+  };
+</script>
+
+<style lang="scss"></style>
+```
