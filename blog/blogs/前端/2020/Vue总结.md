@@ -230,3 +230,94 @@ this.\$refs.focusInput.focusIpt();
   };
 </script>
 ```
+
+## 父子组件间传值
+
+:::warning
+
+1.父组件->子组件
+
+通过 `props: ["len"],` 传值，父组件通过 `:len="length"` 传值
+
+注意：组件库中，布尔属性通过 `:isActive="true"` 传值
+
+2.子组件->父组件
+
+通过 `this.$emit("PostPublish", id);` 注册事件，
+
+父组件通过 `@PostPublish="执行方法，或方法名"`监听事件
+:::
+
+子组件
+
+```html
+<span class="publish" @click="PostItemcomment(item.comment_id)">回复</span>
+
+<script>
+  export default {
+    props: ["componentChild"],
+    name: "CommentItem",
+    data() {
+      return {
+        temp: true,
+      };
+    },
+    methods: {
+      PostItemcomment(id) {
+        this.$emit("PostPublish", id);
+      },
+    },
+  };
+</script>
+```
+
+父组件
+
+```html
+<comment-item
+  v-if="item.child"
+  :componentChild="item.child"
+  @PostPublish="PostPublish"
+></comment-item>
+
+<script>
+  import CommentItem from "@/components/article/CommentItem";
+  export default {
+    name: "comment",
+    data() {
+      return {
+        componentList: null,
+      };
+    },
+    components: {
+      CommentItem,
+    },
+    methods: {
+      async commentData() {
+        const res = await this.$http.get("/comment/" + this.$route.params.id);
+        this.$emit("comment-len", res.data.length);
+        this.componentList = this.changCommentData(res.data);
+      },
+      changCommentData(data) {
+        function fn(temp) {
+          let arr1 = [];
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].parent_id == temp) {
+              arr1.push(data[i]);
+              data[i].child = fn(data[i].comment_id);
+            }
+          }
+          return arr1;
+        }
+        return fn(null);
+      },
+      PostPublish(id) {
+        this.$emit("PostPublish", id);
+      },
+    },
+    created() {
+      this.commentData();
+    },
+  };
+</script>
+```
