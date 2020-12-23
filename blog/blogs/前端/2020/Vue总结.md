@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-## ref 使用
+## ref 基本用法
 
 :::tip
 父组件可以通过 ref 控制 dom 元素及属性，例如：父组件可以调用子组件方法。
@@ -231,7 +231,7 @@ this.\$refs.focusInput.focusIpt();
 </script>
 ```
 
-## 父子组件间传值
+## 父子组件间传值 `props $emit`
 
 :::warning
 
@@ -320,4 +320,67 @@ this.\$refs.focusInput.focusIpt();
     },
   };
 </script>
+```
+
+## v-for 及组件嵌套
+
+```vue
+<template>
+  <div class="commentItems">
+    <div v-for="(item, index) in componentChild" :key="index">
+      <comment-item :componentChild="item.child"></comment-item>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["componentChild"],
+  name: "CommentItem",
+};
+</script>
+```
+
+## 动态样式 `:class={类:布尔值}`
+
+```html
+<p
+  @click="collectionClick"
+  :class="{activeColor1: collectionActive,activeColor2: collectionActive}"
+>
+  <span class="icon-star-full"></span>
+  <span>收藏</span>
+</p>
+
+<script>
+  export default {
+    name: "Article",
+    components: {
+      CommentTitle,
+    },
+    data() {
+      return {
+        collectionActive: false,
+      };
+    },
+    methods: {
+      collectionClick() {
+        this.collectionActive = !this.collectionActive;
+      },
+    },
+  };
+</script>
+<style lang="scss" scoped>
+  .activeColor1 {
+    span:nth-child(1) {
+      color: red;
+    }
+  }
+  .activeColor2 {
+    span:nth-child(2) {
+      color: #000;
+      font-size: 2px !important;
+    }
+  }
+</style>
 ```
