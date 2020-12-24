@@ -1,7 +1,6 @@
-# 随笔 📚
+# 随笔 💖 记录最好的自己 ✨
 
 ![随笔](https://img.shields.io/badge/随笔-notebook-ea7b99)
-
 ![GitHub last commit](https://img.shields.io/github/last-commit/happylay-cloud/happylay-cloud.github.io?style=flat-square)
 
 > ✍️ 在线编辑
