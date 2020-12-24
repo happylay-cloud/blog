@@ -200,6 +200,8 @@ module.exports = {
               { text: "Element桌面端组件库", link: "https://element.eleme.cn/#/zh-CN" },
               { text: "uni-app前端框架", link: "https://uniapp.dcloud.io" },
               { text: "Figma", link: "https://www.figma.com" },
+              { text: "Codepen", link: "https://codepen.io" },
+              { text: "Dribbble", link: "https://dribbble.com" },
               { text: "Iconfont阿里矢量图库", link: "https://www.iconfont.cn" },
               { text: "IconPark图标库", link: "http://iconpark.bytedance.com" },
               { text: "Icomoon", link: "https://icomoon.io/app/#/select" },
