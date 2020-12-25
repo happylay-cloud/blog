@@ -99,7 +99,7 @@ import axios from "axios";
 import router from "./src/router/index";
 import Vue from "vue";
 const http = axios.create({
-  baseURL: "http://112.74.99.5:3000/web/api",
+  baseURL: "http://127.0.0.1:8080/web/api",
 });
 
 // 添加请求拦截器
@@ -170,9 +170,16 @@ module.exports = {
 
 ## slot 插槽
 
-`子组件`
+`子组件-默认插槽`
 
 ```html
+<slot></slot>
+```
+
+`子组件-具名插槽`
+
+```html
+<!-- 具名插槽 -->
 <div>
   <slot name="happylay" />
 </div>
@@ -181,9 +188,34 @@ module.exports = {
 `父组件`
 
 ```html
-<div slot="happylay" style="font-size:25px" @click="testClick">
-  测试插槽
+<div slot="happylay" style="font-size:25px" @click="testClick"></div>
+```
+
+`子组件-作用域插槽`
+
+```html
+<div slot-scope="scope">
+  {{ scope.rowData }}
 </div>
+```
+
+`父组件`
+
+```vue
+<div @click="data = data + 1">
+  <slot :rowData="data"></slot>
+</div>
+
+<script>
+export default {
+  name: "具名插槽",
+  data() {
+    return {
+      data: 0,
+    };
+  },
+};
+</script>
 ```
 
 ## 父子组件间传值 `props $emit`
@@ -203,7 +235,7 @@ module.exports = {
 父组件通过 `@PostPublish="执行方法，或方法名"`监听事件
 :::
 
-子组件
+`子组件`
 
 ```html
 <span class="publish" @click="PostItemcomment(item.comment_id)">回复</span>
@@ -226,7 +258,7 @@ module.exports = {
 </script>
 ```
 
-父组件
+`父组件`
 
 ```html
 <comment-item
@@ -453,7 +485,7 @@ this.\$refs.postInput.focus();
 2.调用方法：
 this.\$refs.focusInput.focusIpt();
 :::
-子组件
+`子组件`
 
 ```html
 <input v-model="content" ref="postInput" />
@@ -475,7 +507,7 @@ this.\$refs.focusInput.focusIpt();
 </script>
 ```
 
-父组件
+`父组件`
 
 ```html
 <comment-title ref="focusInput"></comment-title>
