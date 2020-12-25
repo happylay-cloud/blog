@@ -168,67 +168,22 @@ module.exports = {
 };
 ```
 
-## ref 基本用法
+## slot 插槽
 
-:::tip
-父组件可以通过 ref 控制 dom 元素及属性，例如：父组件可以调用子组件方法。
-
-1.控制元素：
-this.\$refs.postInput.focus();
-
-2.调用方法：
-this.\$refs.focusInput.focusIpt();
-:::
-子组件
+`子组件`
 
 ```html
-<input v-model="content" ref="postInput" />
-<script>
-  export default {
-    props: ["dataLength"],
-    name: "CommentTitle",
-    data() {
-      return {
-        content: null,
-      };
-    },
-    methods: {
-      focusIpt() {
-        this.$refs.postInput.focus();
-      },
-    },
-  };
-</script>
+<div>
+  <slot name="happylay" />
+</div>
 ```
 
-父组件
+`父组件`
 
 ```html
-<comment-title ref="focusInput"></comment-title>
-<comment
-  @comment-len="len => (lens = len)"
-  @PostPublish="PostPublish"
-></comment>
-
-<script>
-  import CommentTitle from "@/components/article/CommentTitle";
-  export default {
-    name: "Article",
-    components: {
-      CommentTitle,
-    },
-    data() {
-      return {
-          lens: null,
-          model: {}
-      };
-    },
-    methods: {
-      PostPublish(id) {
-        this.$refs.focusInput.focusIpt();
-      }
-  };
-</script>
+<div slot="happylay" style="font-size:25px" @click="testClick">
+  测试插槽
+</div>
 ```
 
 ## 父子组件间传值 `props $emit`
@@ -485,6 +440,69 @@ export default {
 };
 </script>
 
+```
+
+## ref 基本用法
+
+:::tip
+父组件可以通过 ref 控制 dom 元素及属性，例如：父组件可以调用子组件方法。
+
+1.控制元素：
+this.\$refs.postInput.focus();
+
+2.调用方法：
+this.\$refs.focusInput.focusIpt();
+:::
+子组件
+
+```html
+<input v-model="content" ref="postInput" />
+<script>
+  export default {
+    props: ["dataLength"],
+    name: "CommentTitle",
+    data() {
+      return {
+        content: null,
+      };
+    },
+    methods: {
+      focusIpt() {
+        this.$refs.postInput.focus();
+      },
+    },
+  };
+</script>
+```
+
+父组件
+
+```html
+<comment-title ref="focusInput"></comment-title>
+<comment
+  @comment-len="len => (lens = len)"
+  @PostPublish="PostPublish"
+></comment>
+
+<script>
+  import CommentTitle from "@/components/article/CommentTitle";
+  export default {
+    name: "Article",
+    components: {
+      CommentTitle,
+    },
+    data() {
+      return {
+          lens: null,
+          model: {}
+      };
+    },
+    methods: {
+      PostPublish(id) {
+        this.$refs.focusInput.focusIpt();
+      }
+  };
+</script>
 ```
 
 ## 正则表达式使用
