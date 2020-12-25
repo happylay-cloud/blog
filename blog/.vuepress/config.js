@@ -198,7 +198,9 @@ module.exports = {
             items: [
               { text: "Vant移动端组件库", link: "https://vant-contrib.gitee.io/vant/#/zh-CN/" },
               { text: "Element桌面端组件库", link: "https://element.eleme.cn/#/zh-CN" },
-              { text: "uni-app前端框架", link: "https://uniapp.dcloud.io" },
+              { text: "uni-app移动端框架", link: "https://uniapp.dcloud.io" },
+              { text: "uview移动端框架", link: "https://www.uviewui.com/" },
+              { text: "colorui2.0文档", link: "https://www.yuque.com/colorui" },
               { text: "Figma", link: "https://www.figma.com" },
               { text: "Codepen", link: "https://codepen.io" },
               { text: "Dribbble", link: "https://dribbble.com" },
