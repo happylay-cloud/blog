@@ -113,6 +113,209 @@ const store = new Vuex.Store({
 export default store;
 ```
 
+## require.context()使用
+
+`目录结构`
+
+```text
+├── App.vue
+├── assets
+│   └── logo.png
+├── components
+│   ├── common.vue
+│   └── global
+│       ├── demo.vue
+│       └── index.js
+├── main.js
+├── router
+│   ├── common.js
+│   ├── index.js
+│   └── modules
+│       ├── demo.js
+│       ├── home.js
+│       └── index.js
+└── views
+    ├── 403.vue
+    ├── 404.vue
+    ├── Frame.vue
+    ├── demo.vue
+    └── index.vue
+```
+
+### 自动导入路由
+
+`router/index.js`
+
+```javascript
+import Vue from "vue";
+import VueRouter from "vue-router";
+import RouterConfig from "./modules"; // 引入业务逻辑模块
+import CommonRouters from "./common"; // 引入通用模块
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  mode: "history", // 需要服务端支持
+  scrollBehavior: () => ({ y: 0 }),
+  routes: RouterConfig.concat(CommonRouters),
+});
+
+console.log(router);
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  next();
+});
+
+export default router;
+```
+
+`router/common.js`
+
+```javascript
+export default [
+  // 默认页面
+  {
+    path: "/",
+    redirect: "/index",
+    hidden: true,
+  },
+  // 无权限页面
+  {
+    path: "/nopermission",
+    name: "nopermission",
+    component: () => import("@/views/403"),
+  },
+  // 404
+  {
+    path: "*",
+    name: "lost",
+    component: () => import("@/views/404"),
+  },
+];
+```
+
+`router/modules/index.js`
+
+```javascript
+const files = require.context(".", true, /\.js$/);
+
+// ["./home.js"] 返回一个数组
+console.log(files.keys());
+let configRouters = [];
+
+files.keys().forEach((key) => {
+  if (key === "./index.js") {
+    return;
+  }
+  // 读取出文件中的default模块
+  configRouters = configRouters.concat(files(key).default);
+});
+
+// 模块排序
+configRouters.sort((a, b) => a.sort - b.sort);
+
+console.log(configRouters);
+
+// 抛出一个Vue-router期待的结构的数组
+export default configRouters;
+```
+
+`router/modules/home.js`
+
+```javascript
+import Frame from "@/views/Frame";
+import Home from "@/views/index";
+export default [
+  // 首页
+  {
+    path: "/index",
+    name: "首页",
+    redirect: "/index",
+    component: Frame,
+    sort: 1,
+    children: [
+      // 嵌套路由
+      {
+        path: "",
+        component: Home,
+      },
+    ],
+  },
+];
+```
+
+`router/modules/demo.js`
+
+```javascript
+import demo from "@/views/demo";
+export default [
+  // 首页
+  {
+    path: "/demo",
+    name: "测试",
+    redirect: "/demo",
+    component: demo,
+    sort: 2,
+  },
+];
+```
+
+### 自动导入全局组件
+
+`components/global/index.js`
+
+```javascript
+import Vue from "vue";
+const contexts = require.context(".", false, /\.vue$/);
+contexts.keys().forEach((component) => {
+  const componentEntity = contexts(component).default;
+  console.log("组件名称", componentEntity.name);
+  // 使用内置的组件名称 进行全局组件注册
+  Vue.component(componentEntity.name, componentEntity);
+});
+```
+
+`components/global/demo.vue`
+
+```vue
+<template>
+  <div>
+    <h1>我是组件</h1>
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "demo",
+  data() {
+    return {};
+  },
+  mounted() {},
+  methods: {},
+};
+</script>
+
+<style lang="scss" scoped></style>
+```
+
+`src/main.js`
+
+```javascript
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "@/components/global";
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  render: (h) => h(App),
+}).$mount("#app");
+```
+
 ## 标准树结构
 
 ```vue
