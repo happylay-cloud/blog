@@ -66,6 +66,95 @@ async open () {
 }
 ```
 
+## 标准树结构
+
+```vue
+<template>
+  <div>
+    <el-tree
+      :data="data"
+      show-checkbox
+      default-expand-all
+      node-key="id"
+      highlight-current
+      :default-expanded-keys="[1]"
+      :default-checked-keys="defaultChecked"
+      :props="defaultProps"
+      draggable
+      @node-drag-end="dragEnd"
+    >
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span>{{ node.label }}</span>
+        <span>
+          <el-button type="text" size="mini" @click="() => append(data)">
+            新增
+          </el-button>
+          <el-button type="text" size="mini" @click="() => remove(node, data)">
+            删除
+          </el-button>
+        </span>
+      </span>
+    </el-tree>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    dragEnd(draggingNode, dropNode, dropType, ev) {
+      console.log("自身id", draggingNode.key, "父节点id", dropNode.parent.key);
+    },
+    append(data) {
+      console.log(data);
+    },
+    remove(node, data) {
+      console.log(node, data);
+    },
+  },
+
+  data() {
+    return {
+      data: [
+        {
+          id: 1,
+          label: "一级菜单",
+          children: [
+            {
+              id: 2,
+              label: "二级菜单",
+              children: [
+                {
+                  id: 3,
+                  label: "三级菜单",
+                },
+                {
+                  id: 4,
+                  label: "三级菜单",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      defaultProps: {
+        children: "children",
+        label: "label",
+      },
+      defaultChecked: [4],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+```
+
 :::tip
 vscode 代码块左移 cmd + [ ，代码块右移 cmd +]
 :::
