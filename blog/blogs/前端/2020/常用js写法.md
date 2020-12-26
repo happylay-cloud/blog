@@ -405,8 +405,20 @@ export default {
 </style>
 ```
 
+## 🌈 彩蛋
+
 :::tip
 vscode 代码块左移 cmd + [ ，代码块右移 cmd +]
 
 vscode 取消撤销 shift + cmd + z
+
+npm、yarn 更新项目依赖
+
+| 说明                   | yarn                                     | npm-check       |
+| ---------------------- | ---------------------------------------- | --------------- |
+| 更新项目依赖，没有交互 | yarn upgrade --latest                    | npm-check -y    |
+| 更新项目依赖，有交互   | yarn upgrade-interactive --latest        | npm-check -u    |
+| 更新全局依赖，没有交互 | yarn global upgrade --latest             | npm-check -g -y |
+| 更新全局依赖，有交互   | yarn global upgrade-interactive --latest | npm-check -g -u |
+
 :::
