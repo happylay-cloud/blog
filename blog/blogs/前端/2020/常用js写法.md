@@ -6,6 +6,7 @@ date: 2020-12-26
 # 所属标签（可以设置多个🏷）
 tags:
   - 代码片段
+  - 模块化
 # 所属分类（可以设置多个💖）
 categories:
   - 前端
@@ -64,6 +65,52 @@ async open () {
 
   console.log(res)
 }
+```
+
+## vuex 模块化
+
+```javascript
+import Vue from "vue";
+import Vuex from "vuex";
+import getters from "./getters";
+
+Vue.use(Vuex);
+
+// 读取文件的路径，读取文件的路径，匹配文件的正则
+const modulesFiles = require.context("./modules", true, /\.js$/);
+
+// -----------------------参数解析-------------------------------
+console.dir(modulesFiles);
+console.log(modulesFiles);
+console.log("1.id：", modulesFiles.id);
+console.log("2.数组[模块名]：", modulesFiles.keys());
+console.log("3.解析：", modulesFiles.resolve(modulesFiles.keys()[0]));
+console.log("4.模块：", modulesFiles(modulesFiles.keys()[0]));
+
+// 它将自动从模块文件中导入所有的vuex模块
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  console.log("原始模块", modules, "模块路径", modulePath);
+
+  // 获取模块名称 './app.js' => 'app'模块名
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, "$1");
+
+  // 传入模块相对路径，返回一个模块 './app.js' => app模块
+  const value = modulesFiles(modulePath);
+
+  // 获取模块内容 state，actions 等等
+  modules[moduleName] = value.default;
+
+  return modules;
+}, {});
+
+console.log("数组[完整模块内容]", modules);
+
+const store = new Vuex.Store({
+  modules,
+  getters,
+});
+
+export default store;
 ```
 
 ## 标准树结构
@@ -157,4 +204,6 @@ export default {
 
 :::tip
 vscode 代码块左移 cmd + [ ，代码块右移 cmd +]
+
+vscode 取消撤销 shift + cmd + z
 :::
