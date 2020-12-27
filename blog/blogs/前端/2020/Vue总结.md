@@ -140,15 +140,34 @@ export default http;
 ## vant 组件库全局引用
 
 ```javascript
-// 前端组件库
-import Vant from "vant";
-import "vant/lib/index.css";
-
-Vue.use(Vant);
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "@/assets/style.css";
+// 样式库
+import "tailwindcss/tailwind.css";
 
 // 轻提示
 import { Toast } from "vant";
 Vue.prototype.$msg = Toast;
+
+// 网络请求
+import http from "../http";
+Vue.prototype.$http = http;
+
+// 前端组件库
+import Vant from "vant";
+import "vant/lib/index.css";
+Vue.use(Vant);
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
 ```
 
 ## vue.config.js 基础配置
