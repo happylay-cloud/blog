@@ -337,3 +337,33 @@ computed:{
   ...mapGetters(['showNum'])
 }
 ```
+
+:::tip
+E.namespaced
+
+```javascript
+export default {
+  // namespaced: true 的方式使其成为带命名空间的模块。保证在变量名一样的时候，添加一个父级名拼接。
+  namespaced: true,
+  state,
+  mutations,
+  actions,
+};
+```
+
+> 使用模块中的 mutations、getters、actions 时候要加上模块名。
+
+> 格式：模块名/模块中的 mutations
+
+例如：使用 commint 执行 mutations。（settings.js 模块中 changeSetting 方法）
+
+this.\$store.commit('settings/changeSetting',userInfo)
+
+> 获取 state 属性时加上模块名
+
+> 格式：store.state.模块名.模块属性
+
+例如：获取 state 属性。
+
+\$store.state.userInfo.userName
+:::
