@@ -145,3 +145,46 @@ const router = new VueRouter({
   </div>
 </template>
 ```
+
+## [跨域配置](https://www.webpackjs.com/configuration/dev-server/#devserver-proxy)
+
+:::tip
+可以通过 process.env.VUE_APP_BASE_API 区分开发环境
+:::
+`vue.config.js`
+
+```javascript
+module.exports = {
+  productionSourceMap: false,
+  publicPath: "./",
+  devServer: {
+    port: 8085,
+    https: false,
+    open: true,
+    proxy: {
+      "/good": {
+        target: "http://localhost:9090",
+        changeOrigin: true,
+        pathRewrite: { "^/good": "api1" },
+      },
+      "/order": {
+        target: "http://localhost:9091",
+        changeOrigin: true,
+        pathRewrite: { "^/order": "api2" },
+      },
+    },
+  },
+};
+```
+
+`http.js`
+
+```javascript
+import axios from "axios";
+
+const http = axios.create({
+  baseURL: process.env.VUE_APP_BASE_API,
+});
+
+export default http;
+```
