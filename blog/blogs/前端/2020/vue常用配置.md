@@ -113,3 +113,35 @@ module.exports = {
   },
 };
 ```
+
+## 嵌套路由
+
+`index.js`
+
+```javascript
+const router = new VueRouter({
+  routes: [
+    {
+      path: "/user/:id",
+      component: Layout,
+      children: [
+        // 当'/user/:id'匹配成功，UserHome会被渲染在Layout的<router-view>中
+        // 空子路由，可以渲染未匹配路由
+        { path: "", component: UserHome },
+        // ...其他子路由
+      ],
+    },
+  ],
+});
+```
+
+`Layout.vue`
+
+```vue
+<template>
+  <div>
+    <h1>框架</h1>
+    <router-view></router-view>
+  </div>
+</template>
+```
