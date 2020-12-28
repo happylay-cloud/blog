@@ -521,3 +521,41 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 ```
+
+## mixin（混入）
+
+:::tip
+mixin 的作用：多个组件可以共享数据和方法
+:::
+
+`mixin.js`
+
+```javascript
+let MIXIN = {
+  data() {
+    return {
+      name: "mixin",
+    };
+  },
+  created() {
+    console.log("mixin...", this.name);
+  },
+  mounted() {},
+  methods: {},
+};
+export default MIXIN;
+```
+
+`引用mixin`
+
+```javascript
+// 全局引用
+import mixin from "./mixin";
+Vue.mixin(mixin);
+
+// 在vue文件中引用
+import "@/mixin"; // 引入mixin文件
+export default {
+  mixins: [mixin],
+};
+```
