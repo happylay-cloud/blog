@@ -448,3 +448,76 @@ import permission from './components/Permission'
 
 Vue.use(permission)
 ```
+
+## src 方式引入 vue , 注册全局指令
+
+`demo.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"
+      type="text/javascript"
+    ></script>
+  </head>
+
+  <body>
+    <div id="app">
+      {{ message }}
+      <input type="text" v-red />
+    </div>
+  </body>
+
+  <!-- 引用自定义指令 -->
+  <script src="./demo.js" type="text/javascript"></script>
+
+  <script>
+    console.log(
+      "%c 🥃 window: ",
+      "font-size:12px;background-color: #F5CE50;color:#fff;",
+      window
+    );
+
+    // 自定义指令（会覆盖相同指令）
+    // Vue.directive("red", {
+    //   // 当被绑定的元素插入到dom中时
+    //   inserted: function(el) {
+    //     // 改变背景颜色
+    //     el.style.background = "green";
+    //   },
+    // });
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!",
+      },
+    });
+  </script>
+</html>
+```
+
+`demo.js`
+
+```javascript
+const install = function(Vue, opts = {}) {
+  Vue.directive("red", {
+    // 当被绑定的元素插入到dom中时
+    inserted: function(el) {
+      // 改变背景颜色
+      el.style.background = "red";
+    },
+  });
+};
+
+// 自动注册全局指令
+if (typeof window !== "undefined" && window.Vue) {
+  install(window.Vue);
+}
+```
