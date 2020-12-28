@@ -609,3 +609,54 @@ rue.test(this.content)
 
 <style lang="scss"></style>
 ```
+
+## dom 元素渲染
+
+:::tip
+created()方法 dom 未渲染
+
+this.\$nextTick()方法 主要是用于随数据改变而改变的 dom
+
+mounted()方法 dom 渲染完毕
+:::
+
+```vue
+<template>
+  <div class="about">
+    <div ref="msgDiv">{{ msg }}</div>
+    <div v-if="msg1">Message got outside $nextTick: {{ msg1 }}</div>
+    <div v-if="msg2">Message got inside $nextTick: {{ msg2 }}</div>
+    <div v-if="msg3">Message got outside $nextTick: {{ msg3 }}</div>
+    <button @click="changeMsg">
+      Change the Message
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  data: function() {
+    return {
+      msg: "Hello Vue.",
+      msg1: "",
+      msg2: "",
+      msg3: "",
+    };
+  },
+  methods: {
+    changeMsg() {
+      this.msg = "Hello world.";
+      this.msg1 = this.$refs.msgDiv.innerHTML;
+      // this.$nextTick()方法主要是用在随数据改变而改变的dom应用场景中，
+      // vue中数据和dom渲染由于是异步的，
+      // 所以，要让dom结构随数据改变这样的操作都应该放进this.$nextTick()的回调函数中
+      // mounted()的钩子函数则是在dom完全渲染后才开始渲染数据，所以，在mounted()中操作dom基本不会存在渲染问题
+      this.$nextTick(() => {
+        this.msg2 = this.$refs.msgDiv.innerHTML;
+      });
+      this.msg3 = this.$refs.msgDiv.innerHTML;
+    },
+  },
+};
+</script>
+```
