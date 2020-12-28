@@ -560,10 +560,12 @@ export default {
 };
 ```
 
-## `$options` 属性
+## `$options属性`
 
 :::tip
-`$options`：用来获取 data 外面的数据和方法
+
+\$options：用来获取 data 外面的数据和方法
+
 :::
 
 ```javascript
@@ -586,4 +588,88 @@ export default {
     this.$options.test();  // 方法
   },
 </script>
+```
+
+:::tip
+
+- 获取额外属性、方法
+
+this.\$options.xxx
+
+- 重置自定义表单
+
+this.form = this.\$options.data().form;
+
+- 重置 data()数据
+
+this.\$options.data()
+
+- 获取 data()数据
+
+this.\$data
+
+- 获取 data()数据
+
+this.\$options.data.call(this)
+
+:::
+
+```vue
+<template>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <input type="text" v-model="form.input" />
+    <button @click="retset">重置</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HelloWorld",
+  props: {
+    msg: String,
+  },
+  data() {
+    return {
+      // 表单
+      form: {
+        input: "",
+      },
+    };
+  },
+  methods: {
+    // 重置表单方法
+    retset() {
+      console.log(this.$options);
+      this.form = this.$options.data().form;
+      // 重置data()
+      console.log(
+        "%c 🌽 this.$options.data(): ",
+        "font-size:12px;background-color: #ED9EC7;color:#fff;",
+        this.$options.data()
+      );
+      // 通过this获取data数据
+      console.log(
+        "%c 🍰 this.$options.data.call(this): ",
+        "font-size:12px;background-color: #4b4b4b;color:#fff;",
+        this.$options.data.call(this)
+      );
+      // 获取data数据
+      console.log(
+        "%c 🥒 this.$data: ",
+        "font-size:12px;background-color: #ED9EC7;color:#fff;",
+        this.$data
+      );
+      // 重置data()中自定义数据
+      console.log(
+        "%c 🍫 this.$options.data().form: ",
+        "font-size:12px;background-color: #465975;color:#fff;",
+        this.$options.data().form
+      );
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss"></style>
 ```
