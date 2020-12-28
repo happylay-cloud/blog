@@ -559,3 +559,31 @@ export default {
   mixins: [mixin],
 };
 ```
+
+## `$options` 属性
+
+:::tip
+`$options`：用来获取 data 外面的数据和方法
+:::
+
+```javascript
+<script>
+export default {
+  name: "Test",
+  data() {
+    return {
+    };
+  },
+  // 在data外面定义的属性和方法通过$options可以获取和调用
+  name: "happylay",
+  age: 18,
+  test() {
+    console.log("方法");
+  },
+  created() {
+    console.log(this.$options.name);  // happylay
+    console.log(this.$options.age);  // 18
+    this.$options.test();  // 方法
+  },
+</script>
+```
