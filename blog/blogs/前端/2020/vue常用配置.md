@@ -188,3 +188,223 @@ const http = axios.create({
 
 export default http;
 ```
+
+## 动态路由
+
+`router/index.js`
+
+```javascript
+import router from "./routers";
+import store from "@/store";
+import Config from "@/settings";
+import NProgress from "nprogress"; // 进度条
+import "nprogress/nprogress.css"; // 进度条样式
+import { getToken } from "@/utils/auth"; // 从cookie中获取token
+import { buildMenus } from "@/api/system/menu";
+import { filterAsyncRouter } from "@/store/modules/permission";
+
+// NProgress配置
+NProgress.configure({ showSpinner: false });
+
+// 没有重定向白名单
+const whiteList = ["/login"];
+
+// 在跳转之前执行
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    // 设置网页标题
+    document.title = to.meta.title + " - " + Config.title;
+  }
+  // 显示进度条
+  NProgress.start();
+
+  // 存在token说明已经登录
+  if (getToken()) {
+    // 已登录且要跳转的页面是登录页
+    if (to.path === "/login") {
+      next({ path: "/" });
+      NProgress.done();
+    } else {
+      // TODO 判断当前用户是否已获取user_info信息（如果执行了刷新操作，则store里的roles为空，此时需要重新添加user_info）
+      if (store.getters.roles.length === 0) {
+        // 获取user_info
+        store
+          .dispatch("GetInfo")
+          .then(() => {
+            // 动态路由，获取菜单
+            loadMenus(next, to);
+          })
+          .catch(() => {
+            store.dispatch("LogOut").then(() => {
+              // TODO 页面刷新，为了重新实例化vue-router对象 避免bug
+              location.reload();
+            });
+          });
+        // 登录时未获取菜单，在此处获取
+      } else if (store.getters.loadMenus) {
+        // 修改成false，防止死循环
+        store.dispatch("updateLoadMenus");
+        // 动态路由，获取菜单
+        loadMenus(next, to);
+      } else {
+        next();
+      }
+    }
+  } else {
+    // 没有令牌
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 在免登录白名单，直接进入
+      next();
+    } else {
+      // 否则全部重定向到登录页，登录后会重定向上级页面
+      next(`/login?redirect=${to.fullPath}`);
+
+      // 完成进度条
+      NProgress.done();
+    }
+  }
+});
+
+// TODO 动态路由，拉取菜单
+export const loadMenus = (next, to) => {
+  buildMenus().then((res) => {
+    const asyncRouter = filterAsyncRouter(res);
+    // 404页面必须放路由最后
+    asyncRouter.push({ path: "*", redirect: "/404", hidden: true });
+    // 生成路由
+    store.dispatch("GenerateRoutes", asyncRouter).then(() => {
+      // TODO 异步添加动态路由状态后，动态添加可访问路由表
+      router.addRoutes(asyncRouter);
+      // 如果addRoutes并未完成，路由守卫会一层一层的执行执行，直到addRoutes完成，找到对应的路由
+      next({ ...to, replace: true });
+    });
+  });
+};
+
+// 在跳转之后判断
+router.afterEach((to, from) => {
+  NProgress.done(); // finish progress bar
+});
+```
+
+`登录后重定向上级路由`
+
+```javascript
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      // TODO 立即执行 :当刷新页面时会立即执行一次handler函数
+      immediate: true
+    }
+  },
+```
+
+`store/modules/permission.js`
+
+```javascript
+import { constantRouterMap } from "@/router/routers";
+import Layout from "@/layout/index";
+
+const permission = {
+  state: {
+    routers: constantRouterMap,
+    addRouters: [],
+  },
+  mutations: {
+    /**
+     *
+     * @param {*} state 属性
+     * @param {*} routers 路由
+     */
+    SET_ROUTERS: (state, routers) => {
+      // 动态路由
+      state.addRouters = routers;
+      // 添加路由实例
+      state.routers = constantRouterMap.concat(routers);
+    },
+  },
+  actions: {
+    /**
+     * 生成路由
+     * @param {*} param0 解构出commit方法
+     * @param {*} asyncRouter 动态路由
+     */
+    GenerateRoutes({ commit }, asyncRouter) {
+      commit("SET_ROUTERS", asyncRouter);
+    },
+  },
+};
+
+/**
+   遍历后台传来的路由字符串，转换为组件对象
+ * @param {*} routers 路由
+ */
+export const filterAsyncRouter = (routers) => {
+  // TODO 遍历后台传来的路由字符串，转换为组件对象
+  return routers.filter((router) => {
+    if (router.component) {
+      if (router.component === "Layout") {
+        // Layout组件特殊处理
+        router.component = Layout;
+      } else {
+        // 获取组件路径
+        const component = router.component;
+        // TODO 加载动态路由
+        router.component = loadView(component);
+      }
+    }
+
+    // 处理子菜单
+    if (router.children && router.children.length) {
+      router.children = filterAsyncRouter(router.children);
+    }
+    return true;
+  });
+};
+
+export const loadView = (view) => {
+  // TODO 路由懒加载
+  return (resolve) => require([`@/views/${view}`], resolve);
+};
+
+export default permission;
+```
+
+`自定义权限指令 v-permission`
+
+```javascript
+import store from "@/store";
+
+export default {
+  /**
+   * v-permission 验证权限自定义指令，在对象插入父级元素时验证
+   * @param {*} el 绑定指令的element
+   * @param {*} binding 指令的表达式对象
+   * @param {*} vnode
+   */
+  inserted(el, binding, vnode) {
+    // TODO 自定义 v-permission
+    const { value } = binding;
+
+    // 获取用户权限
+    const roles = store.getters && store.getters.roles;
+    if (value && value instanceof Array && value.length > 0) {
+      const permissionRoles = value;
+
+      // 检查数组中元素是否满足条件
+      const hasPermission = roles.some((role) => {
+        return permissionRoles.includes(role);
+      });
+
+      // 没有权限，删除节点
+      if (!hasPermission) {
+        el.parentNode && el.parentNode.removeChild(el);
+      }
+    } else {
+      throw new Error(`使用方式： v-permission="['admin','editor']"`);
+    }
+  },
+};
+```
