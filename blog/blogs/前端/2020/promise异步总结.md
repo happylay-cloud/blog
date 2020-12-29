@@ -160,6 +160,99 @@ aysncCallbackFun(12, 29, (res) => {
 });
 ```
 
+## mixin 配合 promise 使用
+
+`Dict.js`
+
+```javascript
+import Vue from "vue";
+import { get as getDictDetail } from "@/api/system/dictDetail";
+
+export default class Dict {
+  // 结构体
+  constructor(dict) {
+    this.dict = dict;
+  }
+
+  /**
+   *
+   * @param {*} names 参数
+   * @param {*} completeCallback 回调函数
+   */
+  async init(names, completeCallback) {
+    if (names === undefined || names === null) {
+      throw new Error("need Dict names");
+    }
+    // 异步请求空数组
+    const ps = [];
+    names.forEach((n) => {
+      Vue.set(this.dict.dict, n, {});
+      Vue.set(this.dict.label, n, {});
+      Vue.set(this.dict, n, []);
+
+      // 添加异步请求对象
+      ps.push(
+        // 此处为一异步请求
+        getDictDetail(n).then((data) => {
+          // 在第一个位置0，新增，数据
+          this.dict[n].splice(0, 0, ...data.content);
+          data.content.forEach((d) => {
+            Vue.set(this.dict.dict[n], d.value, d);
+            Vue.set(this.dict.label[n], d.value, d.label);
+          });
+        })
+      );
+    });
+
+    // 等待异步请求执行完毕
+    await Promise.all(ps);
+    // 回调函数
+    completeCallback("执行成功");
+  }
+}
+```
+
+`index.js`
+
+```javascript
+import Dict from "./Dict";
+
+const install = function(Vue) {
+  Vue.mixin({
+    data() {
+      // 判断数据类型，新增数据对象
+      if (this.$options.dicts instanceof Array) {
+        const dict = {
+          dict: {},
+          label: {},
+        };
+        return {
+          dict,
+        };
+      }
+      return {};
+    },
+    created() {
+      if (this.$options.dicts instanceof Array) {
+        // 传入空对象dict
+        new Dict(this.dict)
+          // 传入初始值，调用初始化方法
+          .init(this.$options.dicts, (res) => {
+            console.log(res);
+            // 渲染随数据变化dom
+            this.$nextTick(() => {
+              // 注册事件
+              this.$emit("dictReady");
+            });
+          });
+      }
+    },
+  });
+};
+
+export default { install };
+```
+
 ## 🌈 彩蛋
 
 :::tip
