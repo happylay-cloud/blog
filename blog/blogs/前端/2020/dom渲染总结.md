@@ -55,7 +55,7 @@ publish: true
       <p v-for="item in items" :key="item.id">
         {{item.message}}
       </p>
-      <p v-for="item in student.list" :key="item.id">
+      <p v-for="(item,index) in student.list" :key="index">
         {{item}}
       </p>
       <pre>{{items}}</pre>
@@ -106,6 +106,14 @@ publish: true
           },
           // 数据不会立即渲染
           btn2errorClick: function() {
+            const data = [
+              { message: "数据", id: "10" },
+              { message: "数据", id: "20" },
+              { message: "数据", id: "30" },
+            ];
+            // 会渲染
+            this.items = data;
+
             // 不会渲染
             this.items[0] = { message: "Change Test", id: "10" };
 
