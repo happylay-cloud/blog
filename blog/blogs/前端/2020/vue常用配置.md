@@ -6,7 +6,7 @@ date: 2020-12-26
 # 所属标签（可以设置多个🏷）
 tags:
   - 代码片段
-
+  - vscode
 # 所属分类（可以设置多个💖）
 categories:
   - 前端
@@ -672,4 +672,114 @@ export default {
 </script>
 
 <style scoped lang="scss"></style>
+```
+
+## 🌈 彩蛋
+
+:::tip
+vscode 常用配置 settings.json 记录
+:::
+`settings.json`
+
+```json
+{
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "go.formatTool": "goimports",
+  // 主题
+  "workbench.colorTheme": "Material Theme High Contrast",
+  // 图标
+  "workbench.iconTheme": "eq-material-theme-icons-palenight",
+  "window.zoomLevel": 0,
+  // 设置字体
+  "editor.fontSize": 12,
+  "editor.tabSize": 2,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "hikerpig.vetur"
+  },
+  // 显示对齐点
+  //"editor.renderWhitespace": "all",
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  // 标签不换行
+  //"vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "auto"
+    }
+  },
+  // 自动格式化代码
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "eslint.format.enable": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "px-to-vw.viewportWidth": 360,
+  "tabnine.experimentalAutoImports": true,
+  // emmet语法，参考文档：https://www.cnblogs.com/shanzhiming/p/10354873.html
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "html"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  // 设置默认浏览器
+  "open-in-browser.default": "Chrome",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "indenticator.color.dark": "#7D8E92",
+  "indenticator.color.light": "#FA7399",
+  // java开发环境
+  "java.configuration.maven.userSettings": "/Users/happylay/Documents/java/maven/apache-maven-3.6.3/conf/settings.xml",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/happylay/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+  "java.project.importOnFirstTimeStartup": "automatic",
+  "java.semanticHighlighting.enabled": true,
+  "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home",
+      "default": true
+    },
+    {
+      "name": "JavaSE-11",
+      "path": "/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home"
+    }
+  ],
+  // 保存后自动修复格式
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // 添加vue支持
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  // 让函数(名)和后面的括号之间加个空格
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "todo-tree.tree.showScanModeButton": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
+}
 ```
