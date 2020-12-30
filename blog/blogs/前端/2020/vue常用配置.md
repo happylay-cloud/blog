@@ -761,9 +761,13 @@ vscode 常用配置 settings.json 记录
       "semi": false, //不加分号
       "singleQuote": true, // 用单引号
       "printWidth": 150, //每行最多多少个字符换行
-      "trailingComma": "es5" // 对象属性最后有 ","
+      //"trailingComma": "es5" // 对象属性最后有 ","
     }
   },
+  // vue3.0关闭检查根组件
+  "vetur.validation.template": false,
+  "vetur.validation.script": true,
+  "vetur.validation.style": true,
   // 自动格式化代码
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
