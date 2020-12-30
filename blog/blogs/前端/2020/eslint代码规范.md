@@ -53,8 +53,23 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    // 关闭shims-vue.d.ts警告
-    "@typescript-eslint/no-explicit-any": ["off"],
+    // 关闭shims-vue.d.ts警告（处理any可能报错）
+    '@typescript-eslint/no-explicit-any': ['off'],
+    // 处理{}可能报错
+    'object-curly-spacing': [2, 'always', {
+      objectsInObjects: true
+    }],
+    // 处理img标签可能报错
+    'no-unused-vars': 'off',
+    'vue/html-self-closing': ['error', {
+      'html': {
+        'void': 'always',
+        'normal': 'never',
+        'component': 'always'
+      },
+      'svg': 'always',
+      'math': 'always'
+    }],
   }
 }
 ```
