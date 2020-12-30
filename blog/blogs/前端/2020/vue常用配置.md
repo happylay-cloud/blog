@@ -683,45 +683,30 @@ vscode 常用配置 settings.json 记录
 
 ```json
 {
+  //-------------------------------------------------------基础配置-----------------------------------------------------------
+  // 控制台字体
   "terminal.integrated.fontFamily": "Hack Nerd Font",
   "go.formatTool": "goimports",
   // 主题
   "workbench.colorTheme": "Material Theme High Contrast",
   // 图标
   "workbench.iconTheme": "eq-material-theme-icons-palenight",
+  // 窗口缩放
   "window.zoomLevel": 0,
   // 设置字体
   "editor.fontSize": 12,
   "editor.tabSize": 2,
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "hikerpig.vetur"
-  },
+  // 设置默认浏览器
+  "open-in-browser.default": "Chrome",
+  "liveServer.settings.CustomBrowser": "chrome",
   // 显示对齐点
   //"editor.renderWhitespace": "all",
-  "vetur.format.defaultFormatter.js": "vscode-typescript",
-  // 标签不换行
-  //"vetur.format.defaultFormatter.html": "js-beautify-html",
-  "vetur.format.defaultFormatterOptions": {
-    "js-beautify-html": {
-      "wrap_attributes": "auto"
-    }
-  },
-  // 自动格式化代码
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true,
-  "eslint.format.enable": true,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.quickSuggestions": {
-    "other": true,
-    "comments": true,
-    "strings": true
-  },
+  // 折叠线高亮颜色
+  "indenticator.color.dark": "#7D8E92",
+  "indenticator.color.light": "#FA7399",
+  // ----------------------------------------------代码注释------------------------------------------------------------------
+  // ----------------------------------------------快速生成代码---------------------------------------------------------------
+  // px转换vw页面布局
   "px-to-vw.viewportWidth": 360,
   "tabnine.experimentalAutoImports": true,
   // emmet语法，参考文档：https://www.cnblogs.com/shanzhiming/p/10354873.html
@@ -730,17 +715,9 @@ vscode 常用配置 settings.json 记录
     "vue": "html",
     "javascript": "html"
   },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  // 设置默认浏览器
-  "open-in-browser.default": "Chrome",
-  "liveServer.settings.CustomBrowser": "chrome",
-  "indenticator.color.dark": "#7D8E92",
-  "indenticator.color.light": "#FA7399",
+  // todo插件配置
+  "todo-tree.tree.showScanModeButton": false,
+  // -----------------------------------------------java配置----------------------------------------------------------------
   // java开发环境
   "java.configuration.maven.userSettings": "/Users/happylay/Documents/java/maven/apache-maven-3.6.3/conf/settings.xml",
   "editor.suggestSelection": "first",
@@ -763,23 +740,80 @@ vscode 常用配置 settings.json 记录
     },
     {
       "name": "JavaSE-11",
-      "path": "/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home"
-    }
+      "path": "/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home",
+    },
   ],
+  // -------------------------------------------------代码格式化-----------------------------------------------------
+  // 让函数(名)和后面的括号之间加个空格
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  // 标签不换行显示
+  "vetur.format.defaultFormatter.html": "prettier", // 格式化模式 ->1."js-beautify-html" 2."prettier"
+  // js不换行显示
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  // vue中template模板属性换行显示配置
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "auto", // "force-aligned" -> 属性强制折行对齐
+      "wrap_line_length": 300, //多少字符换行
+      "end_with_newline": false
+    },
+    "prettier": {
+      "semi": false, //不加分号
+      "singleQuote": true, // 用单引号
+      "printWidth": 150, //每行最多多少个字符换行
+      "trailingComma": "es5" // 对象属性最后有 ","
+    }
+  },
+  // 自动格式化代码
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
   // 保存后自动修复格式
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  // eslint代码自动检查相关配置
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".vue"
+    ]
+  },
   // 添加vue支持
-  "eslint.validate": ["javascript", "javascriptreact", "vue"],
-  // 让函数(名)和后面的括号之间加个空格
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
+  //----------------------------------------------------------------
+  //----------------------------------------------------------------
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "todo-tree.tree.showScanModeButton": false,
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "hikerpig.vetur"
+  },
 }
 ```
