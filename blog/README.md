@@ -12,8 +12,11 @@ heroImageStyle:
     background: "#fff",
     borderRadius: "1rem",
   }
-bgImage: "/img/11.jpg" # 背景图
-bgImageStyle: { height: "550px" }
+bgImage: "/gif/2021-1.gif" # 背景图
+bgImageStyle: { 
+  height: "550px",
+  width: "100%"
+}
 isShowTitleInHome: true
 actionText: 快速开始 ->
 actionLink: /views/other/guide
