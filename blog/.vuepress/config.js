@@ -1,8 +1,8 @@
 module.exports = {
   title: "每天忙碌的日子，也不要忘记了好好生活 🏠",
   description: "如歌岁月，似水流年",
-  dest: "./dist/docs",
-  base: '/blog/',
+  dest: "./dist",
+  base: '/blog',
   locales: {
     "/": {
       lang: "zh-CN",
