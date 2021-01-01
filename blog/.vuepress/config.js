@@ -250,14 +250,14 @@ module.exports = {
       {
         title: "前端技术月刊",
         desc:
-          "聚焦前端，记录过去一个月探索发现的值得推荐的前端技术栈、文章以及应用，每月28日更新",
-        email: "xiaoluoboding@gmail.com",
+          "聚焦前端，记录过去一个月探索发现的值得推荐的前端技术栈、文章以及应用，每月28日更新。",
+        email: "",
         link: "https://xiaoluoboding.github.io/monthly/",
       },
       {
         title: "后端技术月刊",
-        desc: "分享 GitHub 上有趣、入门级的开源项目，每月28日更新",
-        email: "595666367@qq.com",
+        desc: "分享 GitHub 上有趣、入门级的开源项目，每月28日更新。",
+        email: "",
         link: "https://hellogithub.com",
       },
     ],
@@ -267,7 +267,11 @@ module.exports = {
     lastUpdated: "最后一次更新",
     author: "happylay 🐑",
     authorAvatar: "/avatar.jpg",
-    record: "",
+    // 备案
+    // record: 'ICP 备案文案',
+    // recordLink: 'ICP 备案指向链接',
+    // cyberSecurityRecord: '公安部备案文案',
+    // cyberSecurityLink: '公安部备案指向链接',
     startYear: "2020",
   },
   markdown: {

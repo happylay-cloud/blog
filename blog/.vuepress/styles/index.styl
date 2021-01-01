@@ -1,12 +1,33 @@
 // 去除底部图标和主题
-i.iconfont.reco-theme {
-  display :none;
+.footer-wrapper {
+
+  .reco-theme {
+   display :none !important;
+  }
+  span:nth-child(1) {
+    & a {
+    display:none !important;
+    }
+   
+  }
 }
 
-.footer-wrapper a:any-link{
-  display :none;
-}
 // 去除加密页底部链接
 .password-shadow .footer {
   display :none;
+}
+
+// 修改站点左上角图标
+.site-name {
+  font-size: 15px !important;
+  color: #d1ad65 !important;
+}
+
+.home-blog {
+  .hero {
+    div:nth-child(1) {
+    color: #d1ad65 !important;
+  }
+  }
+
 }
