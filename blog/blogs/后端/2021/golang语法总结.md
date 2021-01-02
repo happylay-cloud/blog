@@ -89,6 +89,7 @@ func main() {
 }
 ```
 ## 变量提升
+
 ```go
 package main
 
@@ -141,5 +142,11 @@ func main() {
 	fmt.Println(w1.string)
 	fmt.Println(w1.User.string)
 
+	// 匿名函数
+	var f1 = func() {
+		fmt.Println("匿名函数")
+	}
+
+	f1()
 }
 ```
