@@ -165,6 +165,13 @@ func main() {
 	// 接口实现指针类型
 	var s2 UserService = &User2{}
 	s2.getName()
+
+  s3 := User1{}
+	s3.getName()
+
+	s4 := User2{}
+	s4.getName()
+	
 }
 
 // UserService 接口服务
