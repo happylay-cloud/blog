@@ -502,3 +502,27 @@ func main() {
 	fmt.Println(res)
 }
 ```
+## panic 恐慌 recover 恢复
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// recover 恢复
+	defer func() {
+		if msg := recover(); msg != nil {
+			fmt.Println(msg)
+		}
+	}()
+
+	var f = func() {
+		fmt.Println("延迟执行")
+	}
+	defer f()
+	// panic 恐慌，中断程序main
+	panic("发生恐慌")
+
+}
+```
