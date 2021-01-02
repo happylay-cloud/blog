@@ -521,8 +521,30 @@ func main() {
 		fmt.Println("延迟执行")
 	}
 	defer f()
-	// panic 恐慌，中断程序main
+	// panic 恐慌，中断程序
 	panic("发生恐慌")
 
+}
+```
+## switch
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	switch num := 3; num {
+	case 1, 3:
+		fmt.Println("1,3")
+		// 必须放在最后一行
+		fallthrough
+	case 2:
+		fmt.Println("2")
+		break
+
+	default:
+		fmt.Println("默认")
+	}
 }
 ```
