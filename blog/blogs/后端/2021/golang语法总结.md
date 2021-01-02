@@ -246,3 +246,36 @@ func main() {
 
 }
 ```
+## 回调函数
+```go
+package main
+
+// callback 高级函数，回调函数
+func callback(a, b int, fun func(int, int) int) int {
+
+	println(a, b, fun)
+
+	res := fun(a, b)
+
+	println(res)
+
+	return res
+}
+
+// add 加法函数
+func add(a, b int) int {
+	return a + b
+}
+
+// sub 减法函数
+func sub(a, b int) int {
+	return a - b
+}
+func main() {
+
+	callback(1, 2, add)
+
+	callback(1, 2, sub)
+}
+
+```
