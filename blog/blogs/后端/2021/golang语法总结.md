@@ -28,6 +28,14 @@ publish: true
 <img src="/img/12.jpg" width="256px" height="144px" />
 
 <!-- more -->
+## 常用命令
+```
+go mod init 项目名
+
+go mod tidy    
+
+go mod download
+```
 ## 结构体
 ```go
 package main
