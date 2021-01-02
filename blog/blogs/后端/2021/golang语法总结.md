@@ -393,3 +393,36 @@ func main() {
 	}
 }
 ```
+### 获取错误类型
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+)
+
+func main() {
+
+	f, err := os.Open("go.mod")
+	if err != nil {
+		// 通过断言获取实现类
+		if ins, ok := err.(*os.PathError); ok {
+			fmt.Println("方式一")
+			fmt.Println(ins.Op)
+			fmt.Println(ins.Path)
+			fmt.Println(ins.Err)
+		}
+		switch ins := err.(type) {
+		case *os.PathError:
+			fmt.Println("方式二")
+			fmt.Println(ins)
+		}
+
+		log.Fatal(err)
+	}
+	fmt.Println(f.Name(), "打开文件成功")
+
+}
+```
