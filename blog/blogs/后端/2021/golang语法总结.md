@@ -358,3 +358,38 @@ func main() {
 	fmt.Println(add()(1, 2))
 }
 ```
+## errors错误
+```go
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+// 函数
+func checkOk(age int) error {
+	if age < 0 {
+		// 返回error对象
+		return errors.New("非法数据")
+	}
+	fmt.Println(age)
+	return nil
+}
+func main() {
+
+	// errors创建一个错误
+	err := errors.New("创建错误")
+	fmt.Printf("%T\n", err)
+
+	// fmt创建一个错误方法
+	err1 := fmt.Errorf("错误信息码：%d", 100)
+	fmt.Println(err1)
+
+	err2 := checkOk(-1)
+	if err != nil {
+		fmt.Println(err2)
+		return
+	}
+}
+```
