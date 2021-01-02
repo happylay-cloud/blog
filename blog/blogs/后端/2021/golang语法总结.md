@@ -426,3 +426,41 @@ func main() {
 
 }
 ```
+### 判断错误类型
+```go
+package main
+
+import (
+	"fmt"
+	"net"
+	"path/filepath"
+)
+
+func main() {
+
+	// 对某个主机名执行DNS查询,返回主机地址
+	addr, err := net.LookupHost("www.baidu.com1")
+	fmt.Println(addr, err)
+	if ins, ok := err.(*net.DNSError); ok {
+		if ins.Timeout() {
+			fmt.Println("超时超时")
+		} else if ins.Temporary() {
+			fmt.Println("临时错误")
+		} else {
+			fmt.Println("一般错误")
+		}
+		fmt.Println(ins)
+	}
+
+	// 返回所有匹配的文件
+	files, err := filepath.Glob("*.go")
+	if err != nil && err == filepath.ErrBadPattern {
+		fmt.Println(err)
+	}
+	fmt.Println(files)
+
+	// 忽略错误
+	files1, _ := filepath.Glob("[")
+	fmt.Println(files1)
+}
+```
