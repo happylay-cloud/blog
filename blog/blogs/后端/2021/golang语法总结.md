@@ -171,7 +171,7 @@ func main() {
 
 	s4 := User2{}
 	s4.getName()
-	
+
 }
 
 // UserService 接口服务
@@ -199,5 +199,50 @@ func (u User1) getName() {
 // 方法接受者是个指针类型
 func (u *User2) getName() {
 	fmt.Println("接口实现2")
+}
+```
+## 接口断言
+```go
+package main
+
+import "fmt"
+
+// DoorService 接口服务
+type DoorService interface {
+	open()
+}
+
+// DoorServiceImpl 实体类
+type DoorServiceImpl struct {
+}
+
+// 接口实现
+func (d DoorServiceImpl) open() {
+	fmt.Println("开门")
+}
+
+// 函数
+func getType(t DoorService) {
+
+	// 接口断言 实际类型,断言返回值(true或false) := 接口对象.(实现类型)
+	if ins, ok := t.(DoorServiceImpl); ok {
+		fmt.Println("断言一", ins)
+	}
+
+	// 实际类型:=接口对象.(type)
+	switch ins := t.(type) {
+	case DoorServiceImpl:
+		fmt.Println("断言二", ins)
+	}
+}
+
+func main() {
+
+	var d DoorService = DoorServiceImpl{}
+
+	d.open()
+
+	getType(d)
+
 }
 ```
