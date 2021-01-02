@@ -285,5 +285,32 @@ func main() {
 
 	callback(1, 2, sub)
 }
+```
+## 闭包结构
+```go
+package main
 
+import "fmt"
+
+// 闭包结构
+func allFun() func(a, b int) int {
+
+	// 闭包结构局部变量不会随外层函数结束而销毁，内层函数还在继续使用
+	i := 0
+	// 匿名函数
+	fun := func(a, b int) int {
+		i++
+		return a + b + i
+	}
+
+	return fun
+}
+
+func main() {
+
+	res := allFun()
+	fmt.Println(res(1, 2))
+	fmt.Println(res(1, 2))
+
+}
 ```
