@@ -150,3 +150,47 @@ func main() {
 	f1()
 }
 ```
+## 接口
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 接口实现值类型
+	var s1 UserService = User1{}
+	s1.getName()
+
+	// 接口实现指针类型
+	var s2 UserService = &User2{}
+	s2.getName()
+}
+
+// UserService 接口服务
+type UserService interface {
+	getName()
+}
+
+// User1 实体类
+type User1 struct {
+	name string
+	age  int
+}
+
+// User2 实体类
+type User2 struct {
+	name string
+	age  int
+}
+
+// 方法接收者是个值类型
+func (u User1) getName() {
+	fmt.Println("接口实现1")
+}
+
+// 方法接受者是个指针类型
+func (u *User2) getName() {
+	fmt.Println("接口实现2")
+}
+```
