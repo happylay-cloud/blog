@@ -464,3 +464,41 @@ func main() {
 	fmt.Println(files1)
 }
 ```
+### 自定义错误
+```go
+package main
+
+import "fmt"
+
+// 定义错误结构体
+type myError struct {
+	msg  string
+	code int
+}
+
+// 接口实现，实现Error()方法
+func (e *myError) Error() string {
+	return fmt.Sprintf("错误信息：%s,错误码：%d", e.msg, e.code)
+}
+
+// 函数
+func checkOk(age int) (int, error) {
+
+	if age < 0 {
+		return 0, &myError{"自定义错误", 500}
+	}
+	return age, nil
+}
+func main() {
+
+	res, err := checkOk(-1)
+	if err != nil {
+		// 使用断言获取自定义错误数据
+		if ins, ok := err.(*myError); ok {
+			fmt.Println(ins.msg)
+		}
+		fmt.Println(err)
+	}
+	fmt.Println(res)
+}
+```
