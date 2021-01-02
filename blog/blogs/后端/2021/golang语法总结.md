@@ -88,3 +88,58 @@ func main() {
 	fmt.Println(Add(2020, 2021))
 }
 ```
+## 变量提升
+```go
+package main
+
+import "fmt"
+
+// User 用户
+type User struct {
+	// 匿名字段
+	string
+	int
+}
+
+// Worker 打工人
+type Worker struct {
+	id   int
+	name string
+	user User
+}
+
+// Worker1 打工人
+type Worker1 struct {
+	id   int
+	name string
+	// 匿名变量
+	User
+}
+
+func main() {
+
+	// 匿名字段
+	u1 := User{"大秦赋", 150}
+	fmt.Println(u1.string, u1.int)
+
+	// 匿名结构体
+	u2 := struct {
+		name string
+		age  int
+	}{"快乐的小绵羊", 18}
+
+	fmt.Println(u2.name, u2.age)
+
+	// 结构体嵌套
+	w := Worker{id: 1, name: "快乐的小绵羊", user: User{"打工人", 18}}
+	fmt.Println(w)
+
+	// 结构体嵌套（变量提升）
+	w1 := Worker1{1, "快乐的小绵羊", User{"打工人", 18}}
+	fmt.Println(w1)
+	// 变量提升
+	fmt.Println(w1.string)
+	fmt.Println(w1.User.string)
+
+}
+```
