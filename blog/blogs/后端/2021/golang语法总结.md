@@ -314,3 +314,47 @@ func main() {
 
 }
 ```
+## type定义类型
+```go
+package main
+
+import "fmt"
+
+// 1.定义新的类型myint（不是起别名）
+type myint int
+
+// 2.定义函数类型
+type myfun func(int, int) int
+
+// 3.定义类型别名
+type myint2 = int
+
+// 函数
+func add() myfun {
+
+	fun := func(a, b int) int {
+
+		return a + b
+	}
+
+	return fun
+
+}
+
+func main() {
+
+	// 新类型
+	var t1 myint = 1
+	fmt.Println(t1)
+
+	// 类型别名
+	var t2 myint2
+	t3 := 2
+
+	t2 = t3
+	fmt.Println(t2)
+
+	// 函数别名
+	fmt.Println(add()(1, 2))
+}
+```
