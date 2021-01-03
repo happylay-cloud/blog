@@ -771,3 +771,39 @@ func main() {
 
 }
 ```
+## 并发
+### 同步等待组
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+// 创建同步等待组对象
+var wg sync.WaitGroup
+
+func main() {
+
+	// 设置等待组中要执行的子协程
+	wg.Add(2)
+
+	go func() {
+		fmt.Println("执行一")
+		// 等待组计数器减一
+		wg.Done()
+	}()
+
+	go func() {
+		fmt.Println("执行二")
+		// 等待组计数器减一
+		wg.Done()
+	}()
+
+	// 让主协程处于等待状态
+	wg.Wait()
+
+	fmt.Println("执行完成")
+}
+```
