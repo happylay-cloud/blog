@@ -937,3 +937,43 @@ func main() {
 	fmt.Println("主函数结束")
 }
 ```
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// 创建一个通道main
+	ch1 := make(chan int)
+
+	go sendData(ch1)
+	for {
+		// 让程序进入休眠状态
+		time.Sleep(time.Duration(1) * time.Second)
+		v, ok := <-ch1
+		if !ok {
+			fmt.Println("已经读取所有数据", v, ok)
+			break
+		}
+		fmt.Println("读取数据", v, ok)
+	}
+
+	fmt.Println("主程序结束")
+}
+
+// 函数
+func sendData(ch1 chan int) {
+
+	// 发送数据
+	for i := 0; i < 10; i++ {
+		// 将数据写入通道
+		ch1 <- i
+	}
+	// 关闭通道
+	close(ch1)
+}
+```
