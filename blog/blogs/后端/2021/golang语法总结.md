@@ -881,3 +881,32 @@ func writeData(i int) {
 
 }
 ```
+### 通道
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 定义一个通道
+	var ch1 chan bool
+	ch1 = make(chan bool)
+
+	// 运行一个协程
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(i)
+		}
+		// 程序结束，向通道中写数据
+		ch1 <- true
+		fmt.Println("协程结束")
+	}()
+
+	// 从通道中读数据，阻塞
+	data := <-ch1
+	fmt.Println("主函数读数据", data)
+	fmt.Println("主函数结束")
+
+}
+```
