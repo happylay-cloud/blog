@@ -816,3 +816,68 @@ mutex.Lock()
 // 解锁
 defer mutex.Unlock()
 ```
+### 读写锁
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// 可以随便读，但是写操作，不能读也不能写
+// 创建读写锁
+var rwMutex *sync.RWMutex
+
+// 创建同步等待组对象
+var wg *sync.WaitGroup
+
+func main() {
+	// 实例化对象
+	rwMutex = new(sync.RWMutex)
+	wg = new(sync.WaitGroup)
+
+	wg.Add(6)
+	go readData(1)
+	go readData(2)
+	go readData(3)
+
+	go writeData(1)
+	go readData(2)
+	go writeData(3)
+
+	wg.Wait()
+
+	fmt.Println("主函数结束")
+}
+
+// 函数
+func readData(i int) {
+	defer wg.Done()
+	fmt.Println("开始读read")
+	// 读操作上锁
+	rwMutex.RLock()
+	fmt.Println("正在读数据...", i)
+	// 让程序进入休眠状态
+	time.Sleep(time.Duration(2) * time.Second)
+	// 读操作解锁
+	rwMutex.RUnlock()
+	fmt.Println("读结束", i)
+}
+
+// 函数
+func writeData(i int) {
+	defer wg.Done()
+	fmt.Println("开始写write")
+	// 写操作上锁
+	rwMutex.Lock()
+	fmt.Println("正在读数据...", i)
+	// 让程序进入休眠状态
+	time.Sleep(time.Duration(5) * time.Second)
+	// 读操作解锁
+	rwMutex.Unlock()
+	fmt.Println("写结束", i)
+
+}
+```
