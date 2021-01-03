@@ -630,3 +630,57 @@ func main() {
 	fmt.Printf("s1地址：%p\n", &s1)
 }
 ```
+## map使用
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+
+	var m1 = make(map[string]string)
+
+	m1["id"] = "1"
+	fmt.Println(m1)
+
+	var m2 = map[string]string{"id": "1", "name": "嬴政"}
+	fmt.Println(m2)
+
+	v1, ok := m2["name"]
+	if ok {
+		fmt.Println(v1)
+	} else {
+		fmt.Println("键不存在", v1)
+	}
+	// 删除数据
+	delete(m2, "name")
+
+	fmt.Println(m2)
+
+	// 遍历
+	for key, value := range m2 {
+		fmt.Println(key, value)
+	}
+
+	var m3 = map[int]int{1: 1, 2: 2, 3: 3, 6: 6, 5: 5}
+
+	// 创建切片（切片类型，长度，容量）
+	arr := make([]int, 0, len(m3))
+
+	for key := range m3 {
+		// 添加元素（切片,元素1,元素2）
+		arr = append(arr, key)
+	}
+
+	fmt.Println(arr)
+
+	// 冒泡排序
+	sort.Ints(arr)
+
+	fmt.Println(arr)
+
+}
+```
