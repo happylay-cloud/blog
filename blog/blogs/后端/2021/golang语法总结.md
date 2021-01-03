@@ -684,3 +684,90 @@ func main() {
 
 }
 ```
+## 字符串
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+
+	str :=
+		`这是字符串模板
+		哈哈哈`
+	fmt.Println(str)
+
+	// 是否包含指定内容
+	res := strings.Contains(str, "字符串")
+	fmt.Println(res)
+
+	// 是否包含任意一个字符
+	res1 := strings.ContainsAny(str, "a字b")
+	fmt.Println(res1)
+
+	// 统计字符串出现的次数
+	res2 := strings.Count(str, "字符")
+	fmt.Println(res2)
+
+	// 是否以某个字符串开头
+	res3 := strings.HasPrefix(str, "这是")
+	fmt.Println(res3)
+
+	// 是否以某个字符串结尾
+	res4 := strings.HasSuffix(str, "哈哈")
+	fmt.Println(res4)
+
+	// 获取字符串下标
+	res5 := strings.Index(str, "这")
+	fmt.Println(res5)
+
+	str2 := []string{"张三", "李四"}
+	str3 := strings.Join(str2, "-")
+	fmt.Println(str3)
+
+	// 字符串切割
+	str4 := "a,b,c,d"
+	a4 := strings.Split(str4, ",")
+	fmt.Println(a4)
+
+	// 转换小写
+	s1 := strings.ToLower(str4)
+	fmt.Println(s1)
+
+	// 转换大写
+	s2 := strings.ToUpper(str4)
+	fmt.Println(s2)
+
+	ss1 := "true"
+
+	// 字符串转布尔类型
+	b1, err := strconv.ParseBool(ss1)
+	fmt.Println(b1, err)
+
+	// 布尔类型转字符串
+	ss11 := strconv.FormatBool(b1)
+	fmt.Println(ss11, err)
+
+	ss2 := "100"
+	// 字符串转数值 -> 字符串,进制,位数
+	i2, err := strconv.ParseInt(ss2, 10, 64)
+	fmt.Println(i2, err)
+
+	// 数值转字符串 -> 数值,进制
+	ss3 := strconv.FormatInt(i2, 10)
+	fmt.Println(ss3)
+
+	// 字符串转int
+	i2020, err := strconv.Atoi("-2020")
+	fmt.Println(i2020, err)
+
+	// int转字符串
+	str2020 := strconv.Itoa(i2020)
+	fmt.Println(str2020)
+
+}
+```
