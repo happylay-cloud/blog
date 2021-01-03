@@ -807,3 +807,12 @@ func main() {
 	fmt.Println("执行完成")
 }
 ```
+### 互斥锁
+```go
+// 创建互斥锁对象
+var mutex sync.Mutex
+// 上锁
+mutex.Lock()
+// 解锁
+defer mutex.Unlock()
+```
