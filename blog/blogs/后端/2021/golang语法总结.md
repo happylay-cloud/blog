@@ -548,3 +548,53 @@ func main() {
 	}
 }
 ```
+## 切片
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func main() {
+
+	// 数组
+	arr := [...]string{"张三", "李四", "王五"}
+
+	// 遍历数据
+	for index, value := range arr {
+		fmt.Println(index, value)
+	}
+
+	// 切片
+	a1 := []int{1, 2, 3, 4, 5}
+	a2 := make([]int, 0, 5)
+
+	res11 := len(a1)
+	res21 := len(a2)
+	fmt.Println(res11, res21)
+
+	res12 := cap(a1)
+	res22 := cap(a2)
+	fmt.Println(res12, res22)
+
+	fmt.Println(a2)
+	// 添加元素
+	a2 = append(a2, 1, 2)
+	fmt.Println(a2)
+
+	// 添加元素（切片,切片...）
+	a2 = append(a1, a2...)
+
+	fmt.Println(a2)
+
+	// 设置种子数（时间戳）
+	rand.Seed(time.Now().UnixNano())
+	// 生成随机数
+	num := rand.Intn(100)
+
+	fmt.Println(num)
+}
+```
