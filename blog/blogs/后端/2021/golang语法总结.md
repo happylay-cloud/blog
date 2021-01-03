@@ -549,9 +549,7 @@ func main() {
 }
 ```
 ## 切片
-:::tip
-切片一旦扩容，会重新指向一个新的底层数组。
-:::
+### 创建新切片
 ```go
 package main
 
@@ -599,5 +597,36 @@ func main() {
 	num := rand.Intn(100)
 
 	fmt.Println(num)
+}
+```
+### 从已有数组中创建切片
+:::tip
+从已有数组中创建切片，该切片底层数据指向当前数组，
+
+切片一旦扩容，会重新指向一个新的底层数组。
+:::
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 创建切片类型{元素1,元素2}
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	fmt.Printf("arr地址：%p\n", &arr)
+
+	s1 := arr[:10]
+	fmt.Println("s1", s1)
+
+	s2 := arr[2:5]
+	fmt.Println("s2", s2)
+
+	s1[2] = 100
+	// 添加元素（切片,元素1,元素2）
+	s1 = append(s1, 300)
+	fmt.Println(arr, s1, s2)
+
+	fmt.Printf("s1地址：%p\n", &s1)
 }
 ```
