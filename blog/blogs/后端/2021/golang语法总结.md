@@ -977,3 +977,34 @@ func sendData(ch1 chan int) {
 	close(ch1)
 }
 ```
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 创建通道变量
+	ch1 := make(chan int)
+
+	go sendData(ch1)
+
+	// range 访问通道数据，阻塞式
+	for data := range ch1 {
+		fmt.Println("读取数据", data)
+	}
+
+	fmt.Println("主程序结束")
+
+}
+
+// 函数
+func sendData(ch1 chan int) {
+
+	for i := 0; i < 10; i++ {
+		ch1 <- i
+	}
+	// 通知对方，通道关闭
+	close(ch1)
+}
+```
