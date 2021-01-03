@@ -910,3 +910,30 @@ func main() {
 
 }
 ```
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	ch1 := make(chan int)
+
+	// 运行一个协程
+	go func() {
+
+		fmt.Println("子协程开始执行")
+		// 让程序进入休眠状态
+		time.Sleep(time.Duration(5) * time.Second)
+		data := <-ch1
+
+		fmt.Println("读取数据", data)
+	}()
+
+	ch1 <- 100
+	fmt.Println("主函数结束")
+}
+```
