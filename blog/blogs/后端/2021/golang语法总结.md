@@ -1127,3 +1127,42 @@ func readOnly(ch1 <-chan int) {
 	fmt.Println("子协程只读操作...", data)
 }
 ```
+## 定时器
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// 创建一个定时器，3秒后触发
+	timer := time.NewTimer(time.Duration(3) * time.Second)
+
+	fmt.Printf("%T\n", timer)
+	fmt.Println(time.Now())
+
+	// 等待通道中的数据
+	ch2 := timer.C
+	fmt.Println(<-ch2)
+
+	timer2 := time.NewTimer(time.Duration(5) * time.Second)
+	// 运行一个协程
+	go func() {
+		fmt.Println("开始运行协程")
+		<-timer2.C
+		fmt.Println("定时器二结束")
+	}()
+
+	// 让程序进入休眠状态
+	time.Sleep(time.Duration(3) * time.Second)
+
+	if ok := timer2.Stop(); ok {
+		fmt.Println("定时器二停止")
+	}
+
+}
+
+```
