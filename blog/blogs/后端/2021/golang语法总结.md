@@ -1404,3 +1404,68 @@ func main() {
 
 }
 ```
+### 调用方法
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+// Persion 实体类 结构体类型
+type Persion struct {
+	Name string
+	Age  int
+	Sex  string
+}
+
+// Say 接口实现
+func (p Persion) Say(msg string) {
+	fmt.Println("hi：", msg)
+
+}
+
+// Add 接口实现
+func (p Persion) Add(a, b int) int {
+	return a + b
+}
+
+// PersionInfo 接口实现
+func (p Persion) PersionInfo() {
+	fmt.Println("结构体数据：", p)
+
+}
+func main() {
+
+	p1 := Persion{"张三", 10, "男"}
+
+	value := reflect.ValueOf(p1)
+	fmt.Println(value.Kind(), value.Type())
+
+	methodValue := value.MethodByName("PersionInfo")
+	fmt.Println(methodValue.Kind(), methodValue.Type())
+
+	// 调用无参函数
+	methodValue.Call(nil)
+
+	// 创建空切片
+	args := make([]reflect.Value, 0)
+	methodValue.Call(args)
+
+	// 调用有参函数
+	methodValue1 := value.MethodByName("Say")
+	fmt.Println(methodValue1.Kind(), methodValue1.Type())
+
+	// 创建空切片
+	args1 := []reflect.Value{reflect.ValueOf("参数")}
+	methodValue1.Call(args1)
+
+	methodValue2 := value.MethodByName("Add")
+	fmt.Println(methodValue2.Kind(), methodValue2.Type())
+	// 创建空切片
+	args2 := []reflect.Value{reflect.ValueOf(1), reflect.ValueOf(2)}
+	val2 := methodValue2.Call(args2)
+	fmt.Println(val2[0].Interface())
+}
+```
