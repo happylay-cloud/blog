@@ -881,7 +881,7 @@ func writeData(i int) {
 
 }
 ```
-### 通道
+## chan通道
 ```go
 package main
 
@@ -910,6 +910,7 @@ func main() {
 
 }
 ```
+### 非缓冲通道
 ```go
 package main
 
@@ -1005,6 +1006,49 @@ func sendData(ch1 chan int) {
 		ch1 <- i
 	}
 	// 通知对方，通道关闭
+	close(ch1)
+}
+```
+### 缓冲通道
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+
+	// 创建缓冲通道，设置缓冲区大小
+	ch1 := make(chan string, 4)
+
+	go sendData(ch1)
+
+	for {
+		data, ok := <-ch1
+		if !ok {
+			fmt.Println("通道关闭")
+			break
+		}
+		fmt.Println("读取数据", data)
+	}
+	// range 访问通道数据，阻塞式
+	// for data := range ch1 {
+	// 	fmt.Println("读取数据", data)
+	// }
+
+	fmt.Println("主函数结束")
+}
+
+// 函数
+func sendData(ch1 chan string) {
+
+	for i := 0; i < 10; i++ {
+		ch1 <- strconv.Itoa(i)
+		fmt.Println("发送数据...", i)
+	}
+	// 关闭通道
 	close(ch1)
 }
 ```
