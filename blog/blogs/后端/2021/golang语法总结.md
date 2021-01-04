@@ -1361,3 +1361,46 @@ func main() {
 	fmt.Println(num)
 }
 ```
+### 修改结构体值
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+// Student 实体类
+type Student struct {
+	Name   string
+	Age    int
+	School string
+}
+
+func main() {
+
+	s1 := Student{"张三", 18, "安徽理工大学"}
+	fmt.Println(s1)
+	fmt.Printf("%T\n", s1)
+
+	p1 := &s1
+	fmt.Printf("%T\n", p1)
+
+	fmt.Println((*p1).Name, p1.Name)
+
+	// 修改数值（必须是指针 或 引用类型：切片，map）
+	value := reflect.ValueOf(&s1)
+
+	if value.Kind() == reflect.Ptr {
+		newValue := value.Elem()
+		fmt.Println(newValue)
+		fmt.Println(newValue.CanSet())
+
+		f1 := newValue.FieldByName("Name")
+		f1.SetString("李四")
+
+		fmt.Println(s1)
+	}
+
+}
+```
