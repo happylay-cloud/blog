@@ -1094,3 +1094,36 @@ func sendData(ch1 chan string, done chan bool) {
 
 }
 ```
+### 定向通道
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 双向通道
+	ch1 := make(chan int)
+
+	go writeOnly(ch1) // 写操作
+	data := <-ch1     // 主函数读操作
+	fmt.Println("主函数读取的数据", data)
+
+	go readOnly(ch1) // 读操作
+	ch1 <- 2020      // 主函数写操作
+	fmt.Println("主函数结束")
+
+}
+
+// 定向通道-只写函数
+func writeOnly(ch1 chan<- int) {
+	ch1 <- 2021
+	fmt.Println("子协程只写操作...")
+}
+
+// 定向通道-只读函数
+func readOnly(ch1 <-chan int) {
+	data := <-ch1
+	fmt.Println("子协程只读操作...", data)
+}
+```
