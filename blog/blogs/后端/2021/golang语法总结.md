@@ -1334,3 +1334,30 @@ func getStructInfo(input interface{}) {
 	}
 }
 ```
+### 修改基本类型值
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func main() {
+	var num float64 = 13.14
+
+	fmt.Println("num数值：", num)
+
+	// 获取Value对象main
+	pointer := reflect.ValueOf(&num)
+	// 参数为指针可以修改值
+	newValue := pointer.Elem()
+
+	fmt.Printf("%T\n", newValue)
+	fmt.Println(newValue.CanSet())
+
+	// 修改值
+	newValue.SetFloat(3.14)
+	fmt.Println(num)
+}
+```
