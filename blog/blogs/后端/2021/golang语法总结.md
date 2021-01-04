@@ -1164,5 +1164,20 @@ func main() {
 	}
 
 }
+```
+```go
+package main
 
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// 创建一个定时器，返回时间通道
+	ch := time.After(time.Duration(5) * time.Second)
+	afterTime := <-ch
+	fmt.Println(afterTime)
+}
 ```
