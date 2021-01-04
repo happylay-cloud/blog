@@ -1181,3 +1181,51 @@ func main() {
 	fmt.Println(afterTime)
 }
 ```
+## select通道选择语句
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// 创建双向通道
+	ch1 := make(chan int)
+
+	// 创建双向通道
+	ch2 := make(chan int)
+
+	// 运行一个协程
+	go func() {
+		// 让程序进入休眠状态
+		time.Sleep(time.Duration(3) * time.Second)
+		ch1 <- 2020
+	}()
+
+	// 运行一个协程
+	go func() {
+		// 让程序进入休眠状态
+		time.Sleep(time.Duration(3) * time.Second)
+		ch2 <- 2021
+	}()
+
+	select {
+	case num1 := <-ch1:
+		fmt.Println("从通道1中获取数据", num1)
+	case num2, ok := <-ch2:
+		if ok {
+			fmt.Println("从通道2中获取数据", num2)
+		} else {
+			fmt.Println("通道2已关闭")
+		}
+	default: // 阻塞时被执行
+		fmt.Println("阻塞时执行语句")
+
+	}
+
+	fmt.Println("主函数结束")
+}
+```
