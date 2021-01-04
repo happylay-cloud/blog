@@ -1469,3 +1469,63 @@ func main() {
 	fmt.Println(val2[0].Interface())
 }
 ```
+### 调用函数
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+	"strconv"
+)
+
+// 函数
+func fun1() {
+	fmt.Println("无参函数fun1")
+}
+
+// 函数
+func fun2(a int, b string) {
+	fmt.Println("有参函数fun2", a, b)
+}
+
+// 函数
+func fun3(a int, b string) string {
+	fmt.Println("有参函数fun3", a, b)
+	return strconv.Itoa(a) + b
+}
+
+func main() {
+
+	f1 := fun1
+
+	// 获取反射的值
+	refValue := reflect.ValueOf(f1)
+	// 查看系统默认种类，查看自定义类型
+	fmt.Println(refValue.Kind(), refValue.Type())
+	// 调用函数
+	refValue.Call(nil)
+
+	// 获取反射的值
+	refValue2 := reflect.ValueOf(fun2)
+	// 查看系统默认种类，查看自定义类型
+	fmt.Println(refValue2.Kind(), refValue2.Type())
+	// 调用有参数函数
+	refValue2.Call([]reflect.Value{reflect.ValueOf(2021), reflect.ValueOf("字符串")})
+
+	// 获取反射的值
+	refValue3 := reflect.ValueOf(fun3)
+	// 查看系统默认种类，查看自定义类型
+	fmt.Println(refValue3.Kind(), refValue3.Type())
+	// 调用有参数含返回值函数
+	resultValue := refValue3.Call([]reflect.Value{reflect.ValueOf(2021), reflect.ValueOf("字符串")})
+
+	fmt.Printf("%T\n", resultValue)
+	fmt.Println(resultValue[0].Kind(), resultValue[0].Type())
+
+	realResultValue := resultValue[0].Interface().(string)
+	fmt.Println(realResultValue)
+
+}
+
+```
