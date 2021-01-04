@@ -1052,3 +1052,45 @@ func sendData(ch1 chan string) {
 	close(ch1)
 }
 ```
+### 双向通道
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+	// 创建非缓冲通道变量
+	ch1 := make(chan string)
+
+	// 创建通道，告知子协程不要结束
+	done := make(chan bool)
+
+	go sendData(ch1, done)
+
+	data := <-ch1 // 读取
+
+	fmt.Println("主函数接收数据", data)
+
+	ch1 <- "我是主函数" // 发送
+
+	<-done // 等待子协程结束
+
+	fmt.Println("主函数结束")
+
+}
+
+// 函数
+func sendData(ch1 chan string, done chan bool) {
+
+	ch1 <- "子协程数据" // 发送
+
+	data := <-ch1 // 接收
+
+	fmt.Println("子函数接收数据", data)
+
+	done <- true
+	fmt.Println("子协程结束")
+
+}
+```
