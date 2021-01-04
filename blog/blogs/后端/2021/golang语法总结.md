@@ -1229,3 +1229,108 @@ func main() {
 	fmt.Println("主函数结束")
 }
 ```
+## 反射
+#### 基本类型
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func main() {
+
+	// 基本类型
+	var num int = 1
+
+	fmt.Println("变量的类型", reflect.TypeOf(num))
+	fmt.Println("变量的值", reflect.ValueOf(num))
+
+	newNum := reflect.ValueOf(num)
+	fmt.Println("变量的类别", newNum.Kind())
+	fmt.Println("转换成interface{}类型", newNum.Interface())
+	fmt.Println(newNum.Type())
+	fmt.Println(newNum.Int())
+
+	fmt.Printf("数据类型%T\n", newNum.Interface())
+	fmt.Printf("数据类型%T\n", newNum.Int())
+
+	var num1 float64 = 13.14
+	// 接口类型变量 -> 反射类型对象
+	value := reflect.ValueOf(num1)
+
+	// 反射类型对象 -> 接口类型变量
+	refValue := value.Interface()
+	fmt.Printf("%T\n", refValue)
+	fmt.Println(refValue)
+
+	// 反射类型对象 -> 接口类型变量 （类似强制转换）
+	pointer := reflect.ValueOf(&num1)
+	refPointValue := pointer.Interface().(*float64)
+	fmt.Printf("%T\n", refPointValue)
+	fmt.Println(refPointValue)
+
+}
+```
+### 结构体
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+// Persion 实体类 结构体类型
+type Persion struct {
+	Name string
+	Age  int
+	Sex  string
+}
+
+// Say 接口实现
+func (p Persion) Say(msg string) {
+	fmt.Println("问候", msg)
+
+}
+
+// PersionInfo 接口实现
+func (p Persion) PersionInfo() {
+	fmt.Println("信息", p)
+
+}
+func main() {
+
+	p1 := Persion{"张三", 10, "男"}
+	fmt.Println(p1)
+	getStructInfo(p1)
+}
+
+// getStructInfo 获取结构体信息
+func getStructInfo(input interface{}) {
+	// 获取类型
+	getType := reflect.TypeOf(input)
+	fmt.Println("类型名称", getType.Name())
+	fmt.Println("类型种类", getType.Kind())
+
+	// 获取数值
+	getValue := reflect.ValueOf(input)
+	fmt.Println("类型数值", getValue)
+
+	// 获取字段信息
+	for i := 0; i < getType.NumField(); i++ {
+
+		value := getValue.Field(i).Interface()
+		field := getType.Field(i)
+		fmt.Printf("字段名称：%s，字段类型：%s，字段数值：%v\n", field.Name, field.Type, value)
+	}
+
+	// 获取方法
+	for i := 0; i < getType.NumMethod(); i++ {
+
+		method := getType.Method(i)
+		fmt.Printf("方法名称：%s，方法类型：%v\n", method.Name, method.Type)
+	}
+}
+```
