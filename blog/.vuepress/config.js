@@ -195,6 +195,13 @@ module.exports = {
             ],
           },
           {
+            text: "后端框架",
+            items: [
+              { text: "Spring", link: "https://spring.io" },
+              { text: "GoFrame", link: "https://itician.org/pages/viewpage.action?pageId=1114119" },
+            ],
+          },
+          {
             text: "前端工具",
             items: [
               { text: "Vant移动端组件库", link: "https://vant-contrib.gitee.io/vant/#/zh-CN/" },
