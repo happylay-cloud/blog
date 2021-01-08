@@ -147,3 +147,49 @@ publish: true
   </TaskOptions>
 </TaskOptions>
 ```
+## 框架文档
+
+[修改默认配置](https://itician.org/pages/viewpage.action?pageId=1114668#id-配置管理-默认文件修改)
+
+[ORM字段过滤（处理自增主键问题）](https://itician.org/pages/viewpage.action?pageId=1114229)
+
+[ORM结果处理（json格式数据问题）](https://itician.org/pages/viewpage.action?pageId=1114378)
+
+### yaml格式配置文件
+
+**_springboot的味道 🐑_**
+
+ `config.yaml` 
+
+```yaml
+# http服务器
+server:
+  Address: :8082
+  ServerRoot: public
+  ServerAgent: gf-app
+  LogPath: ./log/gf-app/server
+
+# 日志
+logger:
+  Path: ./log/gf-app
+  Level: all
+  Stdout: true
+
+# 模板
+viewer:
+  Path: template
+  DefaultFile: index.html
+  Delimiters:
+    - '${'
+    - '}'
+
+# 数据库
+database:
+  link: sqlite:./db/sqlite3.db
+  debug: true
+  logger:
+    Path: ./log/gf-app/sql
+    Level: all
+    Stdout: true
+
+```
