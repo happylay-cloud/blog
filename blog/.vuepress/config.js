@@ -192,6 +192,7 @@ module.exports = {
               { text: "cron表达式", link: "https://cron.qqe2.com/" },
               { text: "linux程序包", link: "https://pkgs.org/" },
               { text: "大小写转换", link: "https://tool.lanrentuku.com/daxiaoxie/" },
+              { text: "toml格式转换", link: "http://web.chacuo.net/charsettoml" },
             ],
           },
           {
