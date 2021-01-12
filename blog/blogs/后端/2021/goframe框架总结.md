@@ -193,3 +193,20 @@ database:
     Stdout: true
 
 ```
+## 对象封装
+```go
+// 分配一片内存，返回初始化为零的内存地址
+var AskApi = new(askApi)
+
+// Controller层结构体
+type askApi struct{}
+
+// 初始化结构体，返回内存地址
+var User = &userService{
+  
+}
+
+// Service层结构体
+type userService struct {
+}
+```
