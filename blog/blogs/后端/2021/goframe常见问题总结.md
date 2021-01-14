@@ -89,3 +89,48 @@ func main() {
 
 }
 ```
+## 加载配置文件相关源码
+:::tip
+_**核心源码`gcfg.go`中`FilePath()方法` 。**_
+:::
+```go
+func (c *Config) FilePath(file ...string) (path string) {
+	name := c.name
+	if len(file) > 0 {
+		name = file[0]
+	}
+	// 搜索资源管理器
+	if !gres.IsEmpty() {
+		for _, v := range resourceTryFiles {
+			if file := gres.Get(v + name); file != nil {
+				path = file.Name()
+				return
+			}
+		}
+		c.paths.RLockFunc(func(array []string) {
+			for _, prefix := range array {
+				for _, v := range resourceTryFiles {
+					// 查询获取资源管理器文件
+					if file := gres.Get(prefix + v + name); file != nil {
+						path = file.Name()
+						return
+					}
+				}
+			}
+		})
+	}
+	// 搜索文件系统
+	c.paths.RLockFunc(func(array []string) {
+		for _, prefix := range array {
+			prefix = gstr.TrimRight(prefix, `\/`)
+			if path, _ = gspath.Search(prefix, name); path != "" {
+				return
+			}
+			if path, _ = gspath.Search(prefix+gfile.Separator+"config", name); path != "" {
+				return
+			}
+		}
+	})
+	return
+}
+```
