@@ -29,7 +29,10 @@ publish: true
 <img src="/img/19.jpg" width="256px" height="144px">
 
 <!-- more -->
-
+## axios设置baseURL
+```vue
+axios.defaults.baseURL="http://127.0.0.1:8090";
+```
 ## 环境配置[dev,test,prod]
 
 :::tip
@@ -99,7 +102,6 @@ outputDir = test
     "lint": "vue-cli-service lint"
   },
 ```
-
 `vue.config.js`
 
 ```javascript
