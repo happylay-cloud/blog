@@ -33,3 +33,8 @@ publish: true
 ```
 go get -u -v github.com/spf13/viper
 ```
+
+## [命令行工具](https://github.com/spf13/pflag)
+```
+go get -u -v github.com/spf13/pflag
+```
